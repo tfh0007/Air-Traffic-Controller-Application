@@ -1,5 +1,3 @@
-# Air-Traffic-Controller-Implementation
-
 # Implementation Requirements (40- Points)
 
 a. Implement the classes from design models, along with attributes and methods.
