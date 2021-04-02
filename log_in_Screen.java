@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.util.Random;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import java.io.FileNotFoundException;
 
 /* This class will represent a log in screen that allows
  * creation of new users, in addition to allowing currently made users
@@ -60,7 +61,8 @@ public class log_in_Screen extends JFrame{
       panel.setLayout(null);
       AlreadyHaveAnAccount = new JLabel("If you already have an account you can log in here\n\n");
       NoAccountYetMsg = new JLabel("Alternatively, click Create New User to sign up for a new account\n\n");
-      NoAccountYetMsg = new JLabel("Your user name or password was incorrect");
+      IncorrectCredentials = new JLabel();
+      IncorrectCredentials.setForeground (Color.red);
       
       usernameMsg = new JLabel("User Name");
           passwordMsg = new JLabel("Password");
@@ -87,6 +89,7 @@ public class log_in_Screen extends JFrame{
       passwordInput.setPreferredSize(new Dimension(200, 40));
       
       
+      
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
       // location 0,0 represents the top left corner of the panel
       AlreadyHaveAnAccount.setBounds(105, 0, 400, 20);
@@ -100,7 +103,8 @@ public class log_in_Screen extends JFrame{
       
       NoAccountYetMsg.setBounds(65, 300, 600, 50);
       createNewUser.setBounds(215, 345, 170, 30);
-             
+      
+      IncorrectCredentials.setBounds(90, 250, 500, 20);      
           // This is where we make all of our interface objects visible
           
       panel.add(AlreadyHaveAnAccount);
@@ -114,6 +118,7 @@ public class log_in_Screen extends JFrame{
       panel.add(submit);
       panel.add(createNewUser);
       panel.add(NoAccountYetMsg);
+      panel.add(IncorrectCredentials);
       
    
    }
@@ -138,15 +143,52 @@ public class log_in_Screen extends JFrame{
    private class submitActionListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
+      
+      String userName ="";
+      String password ="";
+      boolean isValidCustomer = false;
 
       System.out.println("DEBUG: Submit button was pressed");
       
-
+      // Collect the string that is currently in the UsernameInput text box
+      userName = usernameInput.getText();
+      
+      // Collect the string that is currently in the passwordInput text box
+      password = passwordInput.getText();
+      
+      try {
+      isValidCustomer = UserInformation.lookForCustomer(userName,password);
+      
+      // DEBUG showing whetehr or not a valid customer was identified
+      if (isValidCustomer == true) {
+         System.out.println("DEBUG: A valid customer was found");
+         
+         // We can close the login window now 
+         setVisible(false);
+         
+// VALID CUSTOMER WAS IDENTIFIED SO THE PROGRAM CAN TRANSITION TO A NEW WINDOW
+      }
+      
+      
+      else {
+      System.out.println("DEBUG: There was no valid customer found");
+      IncorrectCredentials.setText("** Your user name or password was incorrect. Try again**");
+      
+      }
+      
+      }
+      catch (FileNotFoundException c) {
+      System.out.println("DEBUG: File was not found exception was thrown trying to access customers.txt");
+      
+      }
+      
+      
+      
 }
 }
 
    // This class is triggered as soon as we select the Create New User button through the interface
-   private class createNewUserActionListener implements ActionListener {
+   public class createNewUserActionListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
 
