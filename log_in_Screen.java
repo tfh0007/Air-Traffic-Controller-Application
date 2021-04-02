@@ -26,7 +26,10 @@ public class log_in_Screen extends JFrame{
 // createNewUser is the New User button that will allow an individual to create a new account
    private JButton submit, createNewUser;
    
-  
+   private JLabel usernameMsg, passwordMsg, NoAccountYetMsg, AlreadyHaveAnAccount, Whitespace;
+   
+   // These represent our text boxes that the user will have to fill in to continue
+   private JTextField usernameInput, passwordInput;
  
  
    public log_in_Screen() {
@@ -35,7 +38,6 @@ public class log_in_Screen extends JFrame{
       setTitle("Customer Log in");
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-      pack();
       //set display size
       setSize(600, 600);
       //Center the frame to middle of screen
@@ -47,15 +49,47 @@ public class log_in_Screen extends JFrame{
    
   // Create the interface and add everything to it
    private void createView() {
+   
+   
       JPanel panel = new JPanel();
       getContentPane().add(panel);
       panel.setBackground(Color.WHITE);
+      panel.setLayout(null);
+      AlreadyHaveAnAccount = new JLabel("If you already have an account log in here\n\n");
+      
+      usernameMsg = new JLabel("User Name");
+      passwordMsg = new JLabel("Password");
+      
+      
       submit = new JButton("Submit");
       createNewUser = new JButton("Create New User");
+      
+      usernameInput = new JTextField();
+      passwordInput = new JTextField();
+      
+      //Set the visible length of our Input Boxes
+      usernameInput.setPreferredSize(new Dimension(200, 40));
+      passwordInput.setPreferredSize(new Dimension(200, 40));
+      
+      
+      // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
+      AlreadyHaveAnAccount.setBounds(160, 0, 300, 20);
+      passwordInput.setBounds(160, 150, 200, 50);
              
-          // This add a drop down menu for selecting the Lexicon to load
+          // This is where we make all of our interface objects visible
+          
+      panel.add(AlreadyHaveAnAccount);
+      panel.add(usernameMsg);
+      panel.add(usernameInput);
+      
+      
+      panel.add(passwordMsg);
+      panel.add(passwordInput);
+      
       panel.add(submit);
       panel.add(createNewUser);
+      
+   
    }
  
  
