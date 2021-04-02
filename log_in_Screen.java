@@ -21,12 +21,15 @@ import javax.swing.JFrame;
 */ 
 public class log_in_Screen extends JFrame{
 
+   // This class handles reading and writing to the customers.txt file which is the database of customer information
+   private CustomerInformationScanner UserInformation;
+
 
 // submit represents the submit button that is pushed after filling out the needed fields
 // createNewUser is the New User button that will allow an individual to create a new account
    private JButton submit, createNewUser;
    
-   private JLabel usernameMsg, passwordMsg, NoAccountYetMsg, AlreadyHaveAnAccount;
+   private JLabel usernameMsg, passwordMsg, NoAccountYetMsg, AlreadyHaveAnAccount, IncorrectCredentials;
    
    // These represent our text boxes that the user will have to fill in to continue
    private JTextField usernameInput, passwordInput;
@@ -57,18 +60,26 @@ public class log_in_Screen extends JFrame{
       panel.setLayout(null);
       AlreadyHaveAnAccount = new JLabel("If you already have an account you can log in here\n\n");
       NoAccountYetMsg = new JLabel("Alternatively, click Create New User to sign up for a new account\n\n");
-      
+      NoAccountYetMsg = new JLabel("Your user name or password was incorrect");
       
       usernameMsg = new JLabel("User Name");
-      passwordMsg = new JLabel("Password");
+          passwordMsg = new JLabel("Password");
       
       
       submit = new JButton("Submit");
+      submit.addActionListener(
+         new submitActionListener());
       createNewUser = new JButton("Create New User");
+      createNewUser.addActionListener(
+         new createNewUserActionListener());
       
       usernameInput = new JTextField();
+        usernameInput.addActionListener(
+         new usernameInputActionListener());
+
       passwordInput = new JTextField();
-      
+      passwordInput.addActionListener(
+         new passwordInputActionListener());
       
       
       //Set the visible length of our Input Boxes
@@ -122,5 +133,55 @@ public class log_in_Screen extends JFrame{
          
          });
    }
+
+   // This class is triggered as soon as we select the submit button through the interface
+   private class submitActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      System.out.println("DEBUG: Submit button was pressed");
+      
+
+}
 }
 
+   // This class is triggered as soon as we select the Create New User button through the interface
+   private class createNewUserActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      System.out.println("DEBUG: Create New User button was pressed");
+      
+
+}
+}
+
+
+// This class is triggered as soon as we type in the User Name text box button through the interface
+   private class usernameInputActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      System.out.println("DEBUG: User Name has been typed");
+      
+      
+
+}
+}
+
+// This class is triggered as soon as we type in the Password text box button through the interface
+   private class passwordInputActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      System.out.println("DEBUG: Password has been typed");
+      
+      
+
+}
+}
+
+
+
+
+}
