@@ -74,6 +74,10 @@ public class log_in_Screen extends JFrame{
       
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
       AlreadyHaveAnAccount.setBounds(160, 0, 300, 20);
+      usernameMsg.setBounds(160, 50, 300, 20);
+      usernameInput.setBounds(160, 70, 200, 50);
+      
+      
       passwordInput.setBounds(160, 150, 200, 50);
              
           // This is where we make all of our interface objects visible
