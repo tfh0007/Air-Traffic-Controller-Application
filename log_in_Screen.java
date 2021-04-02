@@ -26,7 +26,7 @@ public class log_in_Screen extends JFrame{
 // createNewUser is the New User button that will allow an individual to create a new account
    private JButton submit, createNewUser;
    
-   private JLabel usernameMsg, passwordMsg, NoAccountYetMsg, AlreadyHaveAnAccount, Whitespace;
+   private JLabel usernameMsg, passwordMsg, NoAccountYetMsg, AlreadyHaveAnAccount;
    
    // These represent our text boxes that the user will have to fill in to continue
    private JTextField usernameInput, passwordInput;
@@ -38,8 +38,8 @@ public class log_in_Screen extends JFrame{
       setTitle("Customer Log in");
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-      //set display size
-      setSize(600, 600);
+      //set display frame size (x-axis, y-axis)
+      setSize(600, 450);
       //Center the frame to middle of screen
       setLocationRelativeTo(null);
       //Disable resize
@@ -55,7 +55,9 @@ public class log_in_Screen extends JFrame{
       getContentPane().add(panel);
       panel.setBackground(Color.WHITE);
       panel.setLayout(null);
-      AlreadyHaveAnAccount = new JLabel("If you already have an account log in here\n\n");
+      AlreadyHaveAnAccount = new JLabel("If you already have an account you can log in here\n\n");
+      NoAccountYetMsg = new JLabel("Alternatively, click Create New User to sign up for a new account\n\n");
+      
       
       usernameMsg = new JLabel("User Name");
       passwordMsg = new JLabel("Password");
@@ -67,18 +69,26 @@ public class log_in_Screen extends JFrame{
       usernameInput = new JTextField();
       passwordInput = new JTextField();
       
+      
+      
       //Set the visible length of our Input Boxes
       usernameInput.setPreferredSize(new Dimension(200, 40));
       passwordInput.setPreferredSize(new Dimension(200, 40));
       
       
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
-      AlreadyHaveAnAccount.setBounds(160, 0, 300, 20);
-      usernameMsg.setBounds(160, 50, 300, 20);
-      usernameInput.setBounds(160, 70, 200, 50);
+      // location 0,0 represents the top left corner of the panel
+      AlreadyHaveAnAccount.setBounds(105, 0, 400, 20);
+      usernameMsg.setBounds(200, 50, 300, 20);
+      usernameInput.setBounds(200, 70, 200, 50);
+      
+      passwordMsg.setBounds(200, 130, 300, 20);
+      passwordInput.setBounds(200, 150, 200, 50);
+      submit.setBounds(255, 215, 90, 30);
       
       
-      passwordInput.setBounds(160, 150, 200, 50);
+      NoAccountYetMsg.setBounds(65, 300, 600, 50);
+      createNewUser.setBounds(215, 345, 170, 30);
              
           // This is where we make all of our interface objects visible
           
@@ -92,6 +102,7 @@ public class log_in_Screen extends JFrame{
       
       panel.add(submit);
       panel.add(createNewUser);
+      panel.add(NoAccountYetMsg);
       
    
    }
