@@ -51,12 +51,12 @@ public class CustomerInformationScanner {
    
    // We are at user name
    currentName = scanFile.nextLine();
-   System.out.println("DEBUG:" + currentName + " is the name of the user being read");
+   //System.out.println("DEBUG:" + currentName + " is the name of the user being read");
    
    
    // We are at password now
    currentPassword = scanFile.nextLine();
-   System.out.println("DEBUG:" + currentPassword + " is the name of the password being read");
+   //System.out.println("DEBUG:" + currentPassword + " is the name of the password being read");
    
    // We are at email now
    currentEmail = scanFile.nextLine();
@@ -127,6 +127,9 @@ public class CustomerInformationScanner {
   // Add the user Email to the bottom
   Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
   Files.write(Paths.get(fileName),userEmail.getBytes(),StandardOpenOption.APPEND);
+  
+  // Create a blank line to distinguish from the next user
+  Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
   
   System.out.println("Added user:" + userName + "To the " + fileName + " file");             
   

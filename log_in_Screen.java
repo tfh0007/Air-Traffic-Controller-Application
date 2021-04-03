@@ -194,6 +194,10 @@ public class log_in_Screen extends JFrame{
 
       System.out.println("DEBUG: Create New User button was pressed");
       
+            setVisible(false);
+            CreateNewUserInterface frame2;
+            frame2 = new CreateNewUserInterface();
+      
 
 }
 }
