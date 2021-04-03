@@ -24,8 +24,10 @@ public class CreateNewUserInterface extends JFrame {
    
    // These represent our text boxes that the user will have to fill in to continue
    private JTextField usernameInput, passwordInput, passwordInput2, emailInput;
-
-
+   
+   // These represent our hidden text boxes that the user will have to fill in to continue
+   // Note: JPasswordField uses a depreciated API but this should not be a serious concern
+   private JPasswordField invisiblePasswordInput, invisiblePasswordInput2;
 
 public CreateNewUserInterface() {
 
@@ -76,15 +78,23 @@ createView();
 
       
       usernameInput = new JTextField();
-      passwordInput = new JTextField();
-      passwordInput2 = new JTextField();
+      invisiblePasswordInput = new JPasswordField();
+      
+      // Make the password show astrecisk symbols when typed through the interface
+      invisiblePasswordInput.setEchoChar('*');
+      
+      
+      invisiblePasswordInput2 = new JPasswordField();
+      // Make the password2 show astrecisk symbols when typed through the interface
+      invisiblePasswordInput2.setEchoChar('*');
+      
       emailInput = new JTextField();
       
       
       //Set the visible length of our Input Boxes
       usernameInput.setPreferredSize(new Dimension(400, 40));
-      passwordInput.setPreferredSize(new Dimension(200, 40));
-      passwordInput2.setPreferredSize(new Dimension(200, 40));
+      invisiblePasswordInput.setPreferredSize(new Dimension(200, 40));
+      invisiblePasswordInput2.setPreferredSize(new Dimension(200, 40));
       
       
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
@@ -97,8 +107,8 @@ createView();
       PasswordForAccountMsg.setBounds(105, 145, 600, 50);
       passwordMsg.setBounds(200, 210, 300, 20);
       password2Msg.setBounds(450, 210, 300, 20);
-      passwordInput.setBounds(200, 230, 200, 50);
-      passwordInput2.setBounds(450, 230, 200, 50);
+      invisiblePasswordInput.setBounds(200, 230, 200, 50);
+      invisiblePasswordInput2.setBounds(450, 230, 200, 50);
       
       
       EmailForAccountMsg.setBounds(105, 305, 600, 50);
@@ -122,8 +132,8 @@ createView();
       panel.add(PasswordForAccountMsg);
       panel.add(passwordMsg);
       panel.add(password2Msg);
-      panel.add(passwordInput);
-      panel.add(passwordInput2);
+      panel.add(invisiblePasswordInput);
+      panel.add(invisiblePasswordInput2);
       
       panel.add(EmailForAccountMsg);
       panel.add(emailMsg);
@@ -161,8 +171,8 @@ createView();
        // Collect all of the text box values
       userName = usernameInput.getText();
       
-      userPassword = passwordInput.getText();
-      userPassword2 = passwordInput2.getText();
+      userPassword = invisiblePasswordInput.getText();
+      userPassword2 = invisiblePasswordInput2.getText();
       
       userEmail = emailInput.getText();
       

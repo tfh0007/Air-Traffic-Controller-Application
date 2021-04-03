@@ -20,6 +20,8 @@ import java.io.FileNotFoundException;
  * When an individual creates a new account their name and information will be added to
  * a users text file.
 */ 
+
+// External Sources: Used stackoverflow to learn how to create a hidden password
 public class log_in_Screen extends JFrame{
 
    // This class handles reading and writing to the customers.txt file which is the database of customer information
@@ -35,6 +37,9 @@ public class log_in_Screen extends JFrame{
    // These represent our text boxes that the user will have to fill in to continue
    private JTextField usernameInput, passwordInput;
  
+   // These represent our hidden text boxes that the user will have to fill in to continue
+   // Note: JPasswordField uses a depreciated API but this should not be a serious concern
+   private JPasswordField invisiblePasswordInput;
  
    public log_in_Screen() {
       createView();
@@ -79,14 +84,16 @@ public class log_in_Screen extends JFrame{
         usernameInput.addActionListener(
          new usernameInputActionListener());
 
-      passwordInput = new JTextField();
-      passwordInput.addActionListener(
-         new passwordInputActionListener());
+      invisiblePasswordInput = new JPasswordField();
+      invisiblePasswordInput.addActionListener(
+         new invisiblePasswordInputActionListener());
+      // Make the password show astrecisk symbols when typed through the interface   
+      invisiblePasswordInput.setEchoChar('*');
       
       
       //Set the visible length of our Input Boxes
       usernameInput.setPreferredSize(new Dimension(200, 40));
-      passwordInput.setPreferredSize(new Dimension(200, 40));
+      invisiblePasswordInput.setPreferredSize(new Dimension(200, 40));
       
       
       
@@ -97,7 +104,7 @@ public class log_in_Screen extends JFrame{
       usernameInput.setBounds(200, 70, 200, 50);
       
       passwordMsg.setBounds(200, 130, 300, 20);
-      passwordInput.setBounds(200, 150, 200, 50);
+      invisiblePasswordInput.setBounds(200, 150, 200, 50);
       submit.setBounds(255, 215, 90, 30);
       
       
@@ -113,7 +120,7 @@ public class log_in_Screen extends JFrame{
       
       
       panel.add(passwordMsg);
-      panel.add(passwordInput);
+      panel.add(invisiblePasswordInput);
       
       panel.add(submit);
       panel.add(createNewUser);
@@ -153,8 +160,8 @@ public class log_in_Screen extends JFrame{
       // Collect the string that is currently in the UsernameInput text box
       userName = usernameInput.getText();
       
-      // Collect the string that is currently in the passwordInput text box
-      password = passwordInput.getText();
+      // Collect the string that is currently in the invisiblePasswordInput text box
+      password = invisiblePasswordInput.getText();
       
       try {
       isValidCustomer = UserInformation.lookForCustomer(userName,password);
@@ -216,7 +223,7 @@ public class log_in_Screen extends JFrame{
 }
 
 // This class is triggered as soon as we type in the Password text box button through the interface
-   private class passwordInputActionListener implements ActionListener {
+   private class invisiblePasswordInputActionListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
 
