@@ -173,7 +173,7 @@ createView();
       if (userName.equals("") || userPassword.equals("") || userPassword2.equals("") || userEmail.equals("")) {
          
          CorrectCredentials.setText("                                        ");
-         IncorrectCredentials.setText("** One or more fields was left blank. All fields must be filled in to continue**");
+         IncorrectCredentials.setText("** One or more fields was left blank. All fields must be filled in to continue **");
          System.out.println("DEBUG: One or more Fields was left blank");
          return;         
       
@@ -208,7 +208,7 @@ createView();
             NewUserWasAdded = UserInformation.addNewCustomer(userName,userPassword,userEmail);
             
             IncorrectCredentials.setText("                                        ");   
-            CorrectCredentials.setText("** Success... you can now return to the Customer Login Screen and can use these credentials **");
+            CorrectCredentials.setText("** Success... you can now return to the Customer Login Screen and use these credentials **");
             System.out.println("DEBUG: New User added to the customers database");
         
 

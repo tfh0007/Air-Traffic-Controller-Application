@@ -172,7 +172,7 @@ public class log_in_Screen extends JFrame{
       
       else {
       System.out.println("DEBUG: There was no valid customer found");
-      IncorrectCredentials.setText("** Your user name or password was incorrect. Try again**");
+      IncorrectCredentials.setText("** Your user name or password was incorrect. Try again **");
       
       }
       
