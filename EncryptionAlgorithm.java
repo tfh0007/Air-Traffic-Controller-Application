@@ -26,7 +26,6 @@ public class EncryptionAlgorithm {
          String result ="";
       
                  
-   
 
       System.out.println("DEBUG: After the Encryption process our cipher text is -> " + result);
       
