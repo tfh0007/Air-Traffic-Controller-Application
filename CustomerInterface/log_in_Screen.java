@@ -166,6 +166,10 @@ public class log_in_Screen extends JFrame{
          dispose();
          
 // VALID CUSTOMER WAS IDENTIFIED SO THE PROGRAM CAN TRANSITION TO A NEW WINDOW
+
+         AirlineAndAirportInterface frame3;
+            frame3 = new AirlineAndAirportInterface(userName);
+         
       }
       
       
