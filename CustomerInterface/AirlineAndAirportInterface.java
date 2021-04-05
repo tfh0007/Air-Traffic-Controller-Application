@@ -17,6 +17,9 @@ import java.io.IOException;
 
 public class AirlineAndAirportInterface extends JFrame {
 
+// This will be the name of our current user/customer
+public static String TheUser;
+
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("airplane_wallpaper.jpg");
 
@@ -38,6 +41,8 @@ Image img = Toolkit.getDefaultToolkit().getImage("airplane_wallpaper.jpg");
 
 public AirlineAndAirportInterface(String userName) {
 
+
+TheUser = userName;
 createView(userName);
       
       setTitle(userName + "'s Dashboard **Customer Layout** ");
@@ -207,6 +212,15 @@ createView(userName);
       @Override
       public void actionPerformed(ActionEvent e) {
       
+      
+      // Hide the create new user interface window
+      setVisible(false);
+      
+      // Destroy the AirlineAndAirport interface window. We can create a new one if needed later
+      dispose();
+      ShowUserInfoInterface frame4;
+      frame4 = new ShowUserInfoInterface(TheUser);
+
       
       System.out.println("DEBUG:  Review User Info button was pressed");
 
