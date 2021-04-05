@@ -90,7 +90,7 @@ createView(userName);
             
       
       WelcomeUserMsg = new JLabel("Welcome " + userName + ". Hope you are having a wonderful day");
-      WelcomeUserMsg.setFont(new Font("Arial", Font.PLAIN, 50));
+      WelcomeUserMsg.setFont(new Font("Arial", Font.PLAIN, 43));
       WelcomeUserMsg.setForeground (Color.white);
 
 

@@ -30,7 +30,7 @@ Image img = Toolkit.getDefaultToolkit().getImage("DataBackground.jpg");
 
    private JButton logOut, GoBack;
    
-   private JLabel AboutYourAccontMsg, FullUserName, FullPassword, FullEmail;
+   private JLabel AboutYourAccontMsg, FullUserName, FullPassword, FullEmail, AccountType;
    
    
    // These represent our hidden text boxes that the user will have to fill in to continue
@@ -113,6 +113,11 @@ createView(userName);
       FullEmail = new JLabel("The Email Address provided to us: " + customerInfo[2]);
       FullEmail.setFont(new Font("SansSerif", Font.PLAIN, 35));
       FullEmail.setForeground (Color.white);
+      
+      AccountType = new JLabel("Account Type: Your account is classified as Customer");
+      AccountType.setFont(new Font("SansSerif", Font.PLAIN, 35));
+      AccountType.setForeground (Color.white);
+
                          
       logOut = new JButton("<-- Log Out");
       GoBack = new JButton("Click here to return to " + userName + "'s dashboard");
@@ -151,10 +156,10 @@ createView(userName);
           logOut.setBounds(1, 1, 250, 60);
           
           
-          FullUserName.setBounds(50, 300, 1500, 80);
-          FullPassword.setBounds(50, 400, 1500, 80);
-          FullEmail.setBounds(50, 500, 1500, 80);
-          
+          FullUserName.setBounds(50, 250, 1500, 80);
+          FullPassword.setBounds(50, 350, 1500, 80);
+          FullEmail.setBounds(50, 450, 1500, 80);
+          AccountType.setBounds(50, 550, 1500, 80);
 
           
 
@@ -171,6 +176,7 @@ createView(userName);
             this.add(FullUserName);
             this.add(FullPassword);
             this.add(FullEmail);
+            this.add(AccountType);
             this.add(GoBack);
               
    
