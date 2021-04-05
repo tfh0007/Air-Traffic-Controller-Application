@@ -1,6 +1,6 @@
 About the files and classes in this folder
 
-To run the Customer interface run log_in_Screen through java.
+To run the Customer interface run AirTrafficControllerDriver.java through java.
 
 Class log_in_Screen.java function as the main log in screen for customers
 
