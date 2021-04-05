@@ -25,9 +25,9 @@ Image img = Toolkit.getDefaultToolkit().getImage("airplane_wallpaper.jpg");
 
 // logOut represents the logOut button that is pushed when the user wants to return to the log in screen
 
-   private JButton logOut;
+   private JButton logOut, ScheduleAFlight, ReviewUserInfo, CheckStatusOfExistingFlight;
    
-   private JLabel WelcomeUserMsg;
+   private JLabel WelcomeUserMsg, SelectActionMsg;
    
    // These represent our text boxes that the user will have to fill in to continue
    private JTextField usernameInput;
@@ -40,7 +40,7 @@ public AirlineAndAirportInterface(String userName) {
 
 createView(userName);
       
-      setTitle(userName + "'s Main Dashboard");
+      setTitle(userName + "'s Dashboard **Customer Layout** ");
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
@@ -84,19 +84,60 @@ createView(userName);
       
             
       
-      WelcomeUserMsg = new JLabel("Welcome ");
-      WelcomeUserMsg.setFont(new Font("Arial", Font.PLAIN, 30));
+      WelcomeUserMsg = new JLabel("Welcome " + userName + ". Hope you are having a wonderful day");
+      WelcomeUserMsg.setFont(new Font("Arial", Font.PLAIN, 50));
+      WelcomeUserMsg.setForeground (Color.white);
+
+
+      SelectActionMsg = new JLabel("Please click an action below to get started or click log out to exit");
+      SelectActionMsg.setFont(new Font("Arial", Font.PLAIN, 35));
+      SelectActionMsg.setForeground (Color.white);
 
                     
       logOut = new JButton("<-- Log Out");
+      ScheduleAFlight = new JButton("Click here to schedule a new flight");
+      ReviewUserInfo = new JButton("Click here to view your user profile");
+      CheckStatusOfExistingFlight = new JButton("Click here to check the status on any existing flights");
+      
+      // Make the log out button Opaque
+      logOut.setOpaque(false);
+      logOut.setContentAreaFilled(false);
+      logOut.setBorderPainted(false);
+      logOut.setFont(new Font("Arial", Font.PLAIN, 30));
+      logOut.setForeground (Color.red);
       
            logOut.addActionListener(
             new logOutActionListener());
+            
+      ScheduleAFlight.setOpaque(false);
+      ScheduleAFlight.setContentAreaFilled(false);
+      ScheduleAFlight.setBorderPainted(true);
+      ScheduleAFlight.setFont(new Font("SansSerif", Font.PLAIN, 50));
+      ScheduleAFlight.setForeground (Color.white);
+         
+           ScheduleAFlight.addActionListener(
+            new ScheduleAFlightActionListener());
+            
+      
+      ReviewUserInfo.setOpaque(false);
+      ReviewUserInfo.setContentAreaFilled(false);
+      ReviewUserInfo.setBorderPainted(true);
+      ReviewUserInfo.setFont(new Font("SansSerif", Font.PLAIN, 50));
+      ReviewUserInfo.setForeground (Color.white);
+      
+         ReviewUserInfo.addActionListener(
+            new ReviewUserInfoActionListener());
+      
+      CheckStatusOfExistingFlight.setOpaque(false);
+      CheckStatusOfExistingFlight.setContentAreaFilled(false);
+      CheckStatusOfExistingFlight.setBorderPainted(true);
+      CheckStatusOfExistingFlight.setFont(new Font("SansSerif", Font.PLAIN, 50));
+      CheckStatusOfExistingFlight.setForeground (Color.white);
 
+         CheckStatusOfExistingFlight.addActionListener(
+            new CheckStatusOfExistingFlightActionListener());
       
-      usernameInput = new JTextField();
-      invisiblePasswordInput = new JPasswordField();
-      
+           
            
       
       //Set the visible length of our Input Boxes
@@ -104,16 +145,27 @@ createView(userName);
       
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
       // location 0,0 represents the top left corner of the panel
-          WelcomeUserMsg.setBounds(200, 70, 300, 20);
-          logOut.setBounds(200, 30, 300, 20);
+          WelcomeUserMsg.setBounds(100, 50, 1500, 200);
+          SelectActionMsg.setBounds(200, 190, 1500, 150);
+          
+          logOut.setBounds(1, 1, 250, 60);
+          
+          ScheduleAFlight.setBounds(50, 700, 1500, 80);
+          
+          ReviewUserInfo.setBounds(50, 780, 1500, 80);
+          
+          CheckStatusOfExistingFlight.setBounds(50, 860, 1500, 80);
          
           // This is where we make all of our interface objects visible
           
             this.add(WelcomeUserMsg);
+            this.add(SelectActionMsg);
+            
             this.add(logOut);
-      
+            this.add(ScheduleAFlight);
+            this.add(ReviewUserInfo);
 
-
+            this.add(CheckStatusOfExistingFlight);
       
    
    }
@@ -138,6 +190,40 @@ createView(userName);
       
       }
    }
+   
+   
+   private class ScheduleAFlightActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      
+      
+      System.out.println("DEBUG:  Schedule A Flight button was pressed");
+
+
+      }
+  }
+  
+   private class ReviewUserInfoActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      
+      
+      System.out.println("DEBUG:  Review User Info button was pressed");
+
+
+      }
+  }
+  
+   private class CheckStatusOfExistingFlightActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      
+      
+      System.out.println("DEBUG:   Check Status Of Existing Flight button was pressed");
+
+
+      }
+  }
 
 
 }

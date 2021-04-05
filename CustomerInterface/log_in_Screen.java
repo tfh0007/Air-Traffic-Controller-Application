@@ -227,7 +227,6 @@ public class log_in_Screen extends JFrame{
 
       System.out.println("DEBUG: Password has been typed");
       
-      
 
 }
 }
