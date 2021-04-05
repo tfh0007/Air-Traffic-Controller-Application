@@ -22,7 +22,7 @@ public class CustomerInformationScanner {
    static boolean lookForCustomer(String customerUserName, String customerPassword)
                                                    throws FileNotFoundException {     
      
-      String fileName = "customers.txt";   
+      String fileName = "../Databases/customers.txt";   
       
       // userName represents the Name of the customer that we are looking for
       String userName = customerUserName;
@@ -87,11 +87,11 @@ public class CustomerInformationScanner {
    
   
   
-  // Returns: True if a new customer was created and added to the customers.txt file and false if no customer was created 
+  // Returns: True if a new customer was created and added to the ../Databases/customers.txt file and false if no customer was created 
   static boolean addNewCustomer(String customerUserName, String customerPassword, String customerEmail)
                                                    throws FileNotFoundException {     
      
-      String fileName = "customers.txt";   
+      String fileName = "../Databases/customers.txt";   
       
       // userName represents the Name of the customer that we are looking for
       String userName = customerUserName;
@@ -155,7 +155,7 @@ public class CustomerInformationScanner {
    static boolean userNameAlreadyExists(String customerUserName,String customerEmail)
                                                    throws FileNotFoundException {     
      
-      String fileName = "customers.txt";   
+      String fileName = "../Databases/customers.txt";   
       
       // userName represents the Name of the customer that we are looking for
       String userName = customerUserName;
@@ -213,7 +213,7 @@ public class CustomerInformationScanner {
 static String[] ReturnInfoOnCustomer(String customerUserName)
                                                    throws FileNotFoundException {     
      
-      String fileName = "customers.txt";   
+      String fileName = "../Databases/customers.txt";   
       
       // userName represents the Name of the customer that we are looking for
       String userName = customerUserName;

@@ -21,7 +21,7 @@ public class ShowUserInfoInterface extends JFrame {
 public static String TheUser;
 
 // Grab a background image
-Image img = Toolkit.getDefaultToolkit().getImage("DataBackground.jpg");
+Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/DataBackground.jpg");
 
 // This class handles reading and writing to the customers.txt file which is the database of customer information
    private CustomerInformationScanner UserInformation;
