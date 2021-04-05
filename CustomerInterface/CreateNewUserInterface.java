@@ -17,8 +17,8 @@ public class CreateNewUserInterface extends JFrame {
    private CustomerInformationScanner UserInformation;
 
 // confirm represents the confirm button that is pushed after filling out the needed fields
-// createNewUser is the New User button that will allow an individual to create a new account
-   private JButton confirm, createNewUser;
+// goBackToLogInScreen is the Go Back To Log In Screen that will close the create new user interface and open a new instance of the log in screen
+   private JButton confirm, goBackToLogInScreen;
    
    private JLabel usernameMsg, passwordMsg, password2Msg, emailMsg, PasswordForAccountMsg, UserNameForAccountMsg, EmailForAccountMsg, IncorrectCredentials, CorrectCredentials;
    
@@ -37,7 +37,7 @@ createView();
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
-      setSize(800, 550);
+      setSize(800, 600);
       //Center the frame to middle of screen
       setLocationRelativeTo(null);
       //Disable resize
@@ -56,9 +56,9 @@ createView();
       panel.setBackground(Color.WHITE);
       panel.setLayout(null);
       
-      UserNameForAccountMsg = new JLabel("You Need a user Name for Your account\n\n");
-      PasswordForAccountMsg = new JLabel("You Need a Password for Your account\n\n");
-      EmailForAccountMsg = new JLabel("You Need a valid Email for Your account\n\n");
+      UserNameForAccountMsg = new JLabel("You need a User Name for your account\n\n");
+      PasswordForAccountMsg = new JLabel("You need a Password for your account\n\n");
+      EmailForAccountMsg = new JLabel("You need a valid Email for your account\n\n");
       IncorrectCredentials = new JLabel();
       IncorrectCredentials.setForeground (Color.red);
       CorrectCredentials = new JLabel();
@@ -73,8 +73,14 @@ createView();
       emailMsg = new JLabel("Email Address");
       
       confirm = new JButton("Confirm");
+      
       confirm.addActionListener(
          new confirmActionListener());
+         
+      goBackToLogInScreen = new JButton("<-- Return to the Log In Screen");
+      
+           goBackToLogInScreen.addActionListener(
+            new goBackToLogInScreenActionListener());
 
       
       usernameInput = new JTextField();
@@ -116,7 +122,7 @@ createView();
       emailInput.setBounds(200, 390, 400, 50);
       
       confirm.setBounds(355, 450, 90, 30);
-      
+      goBackToLogInScreen.setBounds(250, 515, 300, 30);
       
 
       
@@ -140,7 +146,7 @@ createView();
       panel.add(emailInput);
       
       panel.add(confirm);
-
+      panel.add(goBackToLogInScreen);
       
       panel.add(IncorrectCredentials);
       panel.add(CorrectCredentials);
@@ -233,5 +239,24 @@ createView();
       
       }
    }
+   
+   private class goBackToLogInScreenActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      
+      
+      System.out.println("DEBUG: goBackToLogInScreen button was pressed");
+      
+      // Hide the create new user interface window
+      setVisible(false);
+      
+      // Destroy the create new user interface window. We can create a new one if needed later
+      dispose();
+      log_in_Screen frame1;
+      frame1 = new log_in_Screen();
+      
+      }
+   }
+
 
 }

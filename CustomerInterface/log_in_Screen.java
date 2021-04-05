@@ -44,7 +44,7 @@ public class log_in_Screen extends JFrame{
    public log_in_Screen() {
       createView();
       
-      setTitle("Customer Log in");
+      setTitle("Customer Log In");
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
@@ -54,6 +54,8 @@ public class log_in_Screen extends JFrame{
       //Disable resize
       setResizable(false);
       
+      // Make the window visible
+      setVisible(true);
    }
    
   // Create the interface and add everything to it
@@ -131,20 +133,8 @@ public class log_in_Screen extends JFrame{
    }
  
  
- // Signal for the interface to run  
-   public static void main (String[] args) {
-         
-         // Opens a new Instance of JFrame
-      SwingUtilities.invokeLater(
-         new Runnable() {
-            @Override
-            public void run() {
-               new log_in_Screen().setVisible(true);
-            }
-         
-         
-         });
-   }
+    
+    
 
    // This class is triggered as soon as we select the submit button through the interface
    private class submitActionListener implements ActionListener {
@@ -172,6 +162,8 @@ public class log_in_Screen extends JFrame{
          
          // We can close the login window now 
          setVisible(false);
+         // Destroy the Log In window. We can bring it back if the user Logs out
+         dispose();
          
 // VALID CUSTOMER WAS IDENTIFIED SO THE PROGRAM CAN TRANSITION TO A NEW WINDOW
       }
@@ -179,13 +171,13 @@ public class log_in_Screen extends JFrame{
       
       else {
       System.out.println("DEBUG: There was no valid customer found");
-      IncorrectCredentials.setText("** Your user name or password was incorrect. Try again **");
+      IncorrectCredentials.setText("** Your User Name or Password was incorrect. Try again **");
       
       }
       
       }
       catch (FileNotFoundException c) {
-      System.out.println("DEBUG: File was not found exception was thrown trying to access customers.txt");
+      System.out.println("DEBUG: File not found exception was thrown trying to access customers.txt");
       
       }
       
@@ -202,6 +194,8 @@ public class log_in_Screen extends JFrame{
       System.out.println("DEBUG: Create New User button was pressed");
       
             setVisible(false);
+            // Destroy the Log In Screen. We will create it again later
+            dispose();
             CreateNewUserInterface frame2;
             frame2 = new CreateNewUserInterface();
       
@@ -233,8 +227,8 @@ public class log_in_Screen extends JFrame{
 
 }
 }
-
-
-
-
 }
+
+
+
+
