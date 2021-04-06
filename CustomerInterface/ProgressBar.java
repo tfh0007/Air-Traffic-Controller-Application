@@ -3,6 +3,8 @@
 import java.awt.*; 
 import javax.swing.*; 
 import java.awt.event.*; 
+import java.util.Random;
+
 public class ProgressBar extends JFrame { 
  
    // create a frame 
@@ -89,6 +91,14 @@ public class ProgressBar extends JFrame {
    public  void fillFast() 
    { 
       int i = 0; 
+      // Pick a random image for our avaliable backgrounds
+      // Lower bound of random number
+      Random randomNumber = new Random(5);
+      Random randomNumber2 = new Random(700);
+      // Upper bound of random number
+      int timeToSleep = randomNumber.nextInt(30);
+      
+
       try { 
       
          boolean occuredOnce = false;
@@ -98,26 +108,26 @@ public class ProgressBar extends JFrame {
          
             // delay the thread 
             
-            Thread.sleep(5);
+            Thread.sleep(timeToSleep);
             
-            if (i % 39 == 1) {
-               Thread.sleep(150); 
-            }
-            
-            if (i % 15 == 1) {
-               Thread.sleep(100); 
-            }
-            
+           //  if (i % 39 == 1) {
+//                Thread.sleep(150); 
+//             }
+//             
+//             if (i % 15 == 1) {
+//                Thread.sleep(100); 
+//             }
+//             
             if (i > 95 && occuredOnce==false) {
-               i=i-93;
-               Thread.sleep(1250); 
-               i=i-5;
+               int BigtimeToSleep = randomNumber2.nextInt(2000);
+               //i=i-93;
+               Thread.sleep(BigtimeToSleep); 
                occuredOnce = true;
             }
-            
-            if (i % 21 == 1) {
-               Thread.sleep(300); 
-            }
+//             
+//             if (i % 21 == 1) {
+//                Thread.sleep(300); 
+//             }
 
 
             
