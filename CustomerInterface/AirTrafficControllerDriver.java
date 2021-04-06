@@ -3,7 +3,7 @@
  * Simply run this class to run the interface
  */
 public class AirTrafficControllerDriver extends Thread {
-
+   // Every thread after the first will get here
    public void run() {
       ProgressBar bar2 = new ProgressBar();
       bar2.fillFast();
