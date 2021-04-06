@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.io.IOException;
+import java.util.Random;
 
 //External Sources:
 //Used https://www.tutorialspoint.com/how-to-add-background-image-to-jframe-in-java to figure out how to have a background image
@@ -20,8 +21,13 @@ public class AirlineAndAirportInterface extends JFrame {
 // This will be the name of our current user/customer
 public static String TheUser;
 
-// Grab a background image
-Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_wallpaper.jpg");
+// Pick a random image for our avaliable backgrounds
+Random randomNumber = new Random();
+int imageToPick = randomNumber.nextInt(2);
+
+
+
+
 
 // This class handles reading and writing to the customers.txt file which is the database of customer information
    private CustomerInformationScanner UserInformation;
@@ -38,6 +44,12 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_wallpaper
    // These represent our hidden text boxes that the user will have to fill in to continue
    // Note: JPasswordField uses a depreciated API but this should not be a serious concern
    private JPasswordField invisiblePasswordInput, invisiblePasswordInput2;
+   
+   
+         // Grab a background image
+      
+   Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_Day.jpg");;
+
 
 public AirlineAndAirportInterface(String userName) {
 
@@ -68,6 +80,27 @@ createView(userName);
 // this will represent our JPanel
       
       // Lets add our image as a background object
+      
+
+// Lets pick a random image based on our random number called imageToPick
+   switch (imageToPick) {
+
+      case 0:
+      img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplaneNight.jpg");
+      break;
+
+      case 1:
+      img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_wallpaper.jpg");
+      break;
+    //   case 2:
+//       img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_vibrant.jpg");
+//       break;
+//       case 3:
+//       img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_wallpaper.jpg");
+//       break;
+
+   }
+      
       this.setContentPane(new JPanel() {
          @Override
          public void paintComponent(Graphics g) {
@@ -92,6 +125,8 @@ createView(userName);
       WelcomeUserMsg = new JLabel("Welcome " + userName + ". Hope you are having a wonderful day");
       WelcomeUserMsg.setFont(new Font("Arial", Font.PLAIN, 43));
       WelcomeUserMsg.setForeground (Color.white);
+      WelcomeUserMsg.setBackground(Color.blue);
+
 
 
       SelectActionMsg = new JLabel("Please click an action below to get started or click log out to exit");
