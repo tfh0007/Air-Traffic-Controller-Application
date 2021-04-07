@@ -25,6 +25,11 @@ public static String TheUser;
 private int startAirportCount = 0;
 private String usersStartAirport;
 
+   // A list of all of our airports that can be used as arrival and destination locations
+private String[] airports = { "Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7" };
+
+
 
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgroundLarge.jpg");
@@ -40,11 +45,8 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
    // Note: JPasswordField uses a depreciated API but this should not be a serious concern
    private JPasswordField creditCardNumber;
    
-   private JComboBox menuForStartAirports = new JComboBox();
+   private JComboBox menuForStartAirports;
 
-   // A list of all of our airports that can be used as arrival and destination locations
-   private String[] airports = { "Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7" };
 
 
 
@@ -118,47 +120,13 @@ createView(userName);
       PriceSoFarMsg.setForeground (Color.gray);
       
       // Lets make our menues
+      //This causes an unsafe warning somehow 
+      menuForStartAirports = new JComboBox(airports);
+      menuForStartAirports.setSelectedIndex(airports.length-1);
+      menuForStartAirports.addActionListener(
+         new menuForStartAirportsActionListener());
       
-      
-      
-         for (int i = 0; i < 7; i++){
-            menuForStartAirports.addItem(airports[startAirportCount++]);
-               new ActionListener() {
-                  public void actionPerformed(ActionEvent e) {
-                  if (startAirportCount < airports.length)
-                     menuForStartAirports.addItem(airports[startAirportCount++]);
-               }
-            };
             
-          menuForStartAirports.addActionListener(
-            new ActionListener() {
-               public void actionPerformed(ActionEvent e) {
-                  int action = menuForStartAirports.getSelectedIndex();
-                  if (action == 0) {
-                     usersStartAirport = "wordfiles/CSW12.txt";
-                  }
-                  if (action == 1) {
-                     usersStartAirport = "wordfiles/OWL.txt";
-                  }
-                  if (action == 2) {
-                     usersStartAirport = "wordfiles/words.txt";
-                  }
-                  if (action == 3) {
-                     usersStartAirport = "wordfiles/words_medium.txt";
-                  }
-                  if (action == 4) {
-                     usersStartAirport = "wordfiles/words_small.txt";
-                  }
-                  if (action == 5) {
-                     usersStartAirport = "wordfiles/words_tiny.txt";  
-                  }
-                  if (action == 6) {
-                     usersStartAirport = "wordfiles/EnglishWords.txt";
-                  }
-                  
-                }
-              });
-            }
 
       
       //Now lets make the right side of the screen
@@ -292,4 +260,16 @@ createView(userName);
       }
   }
   
- } 
+     private class menuForStartAirportsActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+         JComboBox cb = (JComboBox)e.getSource();
+         usersStartAirport = (String)cb.getSelectedItem();
+
+  
+      } 
+
+
+   }
+}
