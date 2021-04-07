@@ -16,7 +16,7 @@ import java.util.Random;
 //External Sources:
 //Used https://www.tutorialspoint.com/how-to-add-background-image-to-jframe-in-java to figure out how to have a background image
 
-public class AirlineAndAirportInterface extends JFrame {
+public class AirlineAndAirportInterface extends JFrame  {
 
 // This will be the name of our current user/customer
 public static String TheUser;
@@ -51,7 +51,7 @@ int imageToPick = randomNumber.nextInt(2);
    Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/airplane_Day.jpg");;
 
 
-public AirlineAndAirportInterface(String userName) {
+public AirlineAndAirportInterface(String userName)  {
 
 
 TheUser = userName;
@@ -66,6 +66,8 @@ createView(userName);
       setLocationRelativeTo(null);
       //Disable resize
       setResizable(false);
+      
+       
       // Make this window visible
       setVisible(true);
 
@@ -106,6 +108,8 @@ createView(userName);
          public void paintComponent(Graphics g) {
          
          //Lets paint the image so that it becomes visible
+         
+
             super.paintComponent(g);
             g.drawImage(img, 0, 0, null);
          }
@@ -115,6 +119,13 @@ createView(userName);
    //   getContentPane().add(this);
       
       
+               // Wait a little bit to ensure background is made
+//       try {
+//       Thread.sleep(300); 
+//       }
+//       catch (InterruptedException f) {
+//       
+//       }
 
 
       //panel.setBackground(Color.GRAY);
@@ -240,6 +251,15 @@ createView(userName);
       System.out.println("DEBUG:  Schedule A Flight button was pressed");
 
 
+      // Hide the Airline and Airport dashboard interface window
+      setVisible(false);
+      
+      // Destroy the create new user interface window. We can create a new one if needed later
+      dispose();
+      ScheduleAFlightInterface frame5;
+      frame5 = new ScheduleAFlightInterface(TheUser);
+
+
       }
   }
   
@@ -251,7 +271,7 @@ createView(userName);
       // Hide the create new user interface window
       setVisible(false);
       
-      // Destroy the AirlineAndAirport interface window. We can create a new one if needed later
+      // Destroy the AirlineAndAirport dashboard interface window. We can create a new one if needed later
       dispose();
       ShowUserInfoInterface frame4;
       frame4 = new ShowUserInfoInterface(TheUser);

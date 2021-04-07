@@ -70,6 +70,9 @@ createView(userName);
          @Override
          public void paintComponent(Graphics g) {
          
+         
+
+         
          //Lets paint the image so that it becomes visible
             super.paintComponent(g);
             g.drawImage(img, 0, 0, null);
@@ -80,6 +83,13 @@ createView(userName);
    //   getContentPane().add(this);
       
       
+                     // Wait a little bit to ensure background is made
+//       try {
+//       Thread.sleep(300); 
+//       }
+//       catch (InterruptedException f) {
+//       
+//       }
 
 
       //panel.setBackground(Color.GRAY);
