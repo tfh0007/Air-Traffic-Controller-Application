@@ -26,7 +26,13 @@ private int startAirportCount = 0;
 private String usersStartAirport;
 
    // A list of all of our airports that can be used as arrival and destination locations
+   // This array is causing an unsafe warning
 private String[] airports = { "Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
+      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
       "Airport4", "Airport5", "Airport6", "Airport7" };
 
 
@@ -122,7 +128,9 @@ createView(userName);
       // Lets make our menues
       //This causes an unsafe warning somehow 
       menuForStartAirports = new JComboBox(airports);
-      menuForStartAirports.setSelectedIndex(airports.length-1);
+      menuForStartAirports.setSelectedIndex(0);
+      menuForStartAirports.setFont(new Font("Arial", Font.PLAIN, 30));
+
       menuForStartAirports.addActionListener(
          new menuForStartAirportsActionListener());
       
@@ -266,6 +274,8 @@ createView(userName);
 
          JComboBox cb = (JComboBox)e.getSource();
          usersStartAirport = (String)cb.getSelectedItem();
+
+         System.out.println("DEBUG: Option: " + usersStartAirport + " was just picked in the menu for start airport");
 
   
       } 
