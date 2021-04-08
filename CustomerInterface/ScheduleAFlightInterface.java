@@ -29,16 +29,12 @@ private String usersStartAirport, usersDestinationAirport, UsersSeatChoice;
 
    // A list of all of our airports that can be used as arrival and destination locations
    // This array is causing an unsafe warning
-private String[] airports = { "Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
-      "Airport4", "Airport5", "Airport6", "Airport7" };
+private String[] airports = { "Please select an airport", "Placeholder", "Placeholder",
+      "Placeholder", "Placeholder", "Placeholder", "Placeholder","Placeholder", "Placeholder", "Placeholder",
+      "Placeholder", "Placeholder", "Placeholder", "Placeholder","Placeholder", "End Placeholder" };
 
    // A list of all of our seat choices that can be used by the customer
-private String[] seatChoice = { "Please select a seat Preference", "First-Class", "Business Class", "Premium Economy Class", "Economy Class" };
+private String[] seatChoice = { "Please select a seat preference", "First Class", "Business Class", "Premium Economy Class", "Economy Class" };
 
 
 // Grab a background image
@@ -336,7 +332,7 @@ createView(userName);
          
          
          // Increase the prices based on seat upgrade
-            if (UsersSeatChoice.equals("First-Class")) {
+            if (UsersSeatChoice.equals("First Class")) {
          
             // User wants first class so increase price x4
             // Change later to be cooler
