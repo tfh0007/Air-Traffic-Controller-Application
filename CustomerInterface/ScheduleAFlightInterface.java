@@ -24,8 +24,8 @@ public static String TheUser;
 // This is our startAirportCounter for the starting Airport decision in the menu
 // TicketPrice is the current price of the customers ticket. The ticket price will start at the lowest value possible
 // currentTicketPrice is the price of the ticket with our current selections
-private int startAirportCount = 0, TicketPrice=223, currentTicketPrice=223;
-private String usersStartAirport, usersDestinationAirport, UsersSeatChoice;
+private int startAirportCount = 0, originalTicketPrice=223, TicketPrice=223, currentTicketPrice=223;
+private String usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice;
 
    // A list of all of our airports that can be used as arrival and destination locations
    // This array is causing an unsafe warning
@@ -34,8 +34,10 @@ private String[] airports = { "Please select an airport", "Placeholder", "Placeh
       "Placeholder", "Placeholder", "Placeholder", "Placeholder","Placeholder", "End Placeholder" };
 
    // A list of all of our seat choices that can be used by the customer
-private String[] seatChoice = { "Please select a seat preference", "First Class", "Business Class", "Premium Economy Class", "Economy Class" };
+private String[] seatChoice = { "First Class", "Business Class", "Premium Economy Class", "Economy Class" };
 
+   // A list of all of our multiple flight choices
+private String[] multipleFlightChoice = { "Round trip ticket","One way ticket"};
 
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgroundLarge.jpg");
@@ -51,16 +53,26 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
    // Note: JPasswordField uses a depreciated API but this should not be a serious concern
    private JPasswordField creditCardNumber;
    
-   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice;
+   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight;
 
 
 
 
 public ScheduleAFlightInterface(String userName) {
 
-TheUser = userName;
 
-createView(userName);
+// Initialize our variables
+   TheUser = userName;
+
+   createView(userName);
+
+// by default UsersSeatChoice will be "Economy Class"
+   UsersSeatChoice = "Economy Class";
+// by default UsersMultipleFlightChoice will One way ticket
+   UsersMultipleFlightChoice = "One way ticket";
+   
+
+
       
       setTitle("Info about " + userName + "  **Customer Layout** ");
       //Make window exit application on close
@@ -143,18 +155,24 @@ createView(userName);
          
          
             menuForSeatChoice = new JComboBox(seatChoice);
-      menuForSeatChoice.setSelectedIndex(0);
+      menuForSeatChoice.setSelectedIndex(3);
       menuForSeatChoice.setFont(new Font("Arial", Font.PLAIN, 30));
 
       menuForSeatChoice.addActionListener(
          new menuForSeatChoiceActionListener());
 
-      
+            menuForMultipleFlight = new JComboBox(multipleFlightChoice);
+      menuForMultipleFlight.setSelectedIndex(1);
+      menuForMultipleFlight.setFont(new Font("Arial", Font.PLAIN, 30));
+
+      menuForMultipleFlight.addActionListener(
+         new menuForMultipleFlightActionListener());
+
             
 
       
       //Now lets make the right side of the screen
-      TicketResultsMsg = new JLabel("Here is your round trip flight thus far" );
+      TicketResultsMsg = new JLabel("Please tell us if you want a round trip ticket" );
       TicketResultsMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       TicketResultsMsg.setForeground (Color.white);
 
@@ -205,7 +223,7 @@ createView(userName);
           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
           
             //Lets do right side
-          TicketResultsMsg.setBounds(900, 30, 1500, 200);
+          TicketResultsMsg.setBounds(880, 30, 1500, 200);
           
           //Our buttons
           logOut.setBounds(1, 1, 250, 60);
@@ -216,6 +234,7 @@ createView(userName);
           menuForStartAirports.setBounds(50, 190, 600, 50);
           menuForDestinationAirports.setBounds(50, 360, 600, 50);
           menuForSeatChoice.setBounds(50, 530, 600, 50);
+          menuForMultipleFlight.setBounds(880, 190, 600, 50);
 
           //Our text fields
           
@@ -233,6 +252,7 @@ createView(userName);
             this.add(menuForStartAirports);
             this.add(menuForDestinationAirports);
             this.add(menuForSeatChoice);
+            this.add(menuForMultipleFlight);
 
             
             //Now lets do right side
@@ -399,6 +419,51 @@ createView(userName);
       } 
       }
       
+      private class menuForMultipleFlightActionListener implements ActionListener {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+      
+            JComboBox cb = (JComboBox)e.getSource();
+            UsersMultipleFlightChoice = (String)cb.getSelectedItem();
+
+            System.out.println("DEBUG: Option: " + UsersMultipleFlightChoice + " was just picked in the menu for multiple flights");
+            
+            // WE HAVE TO HAVE A FUNCTION TO PROPERLY UPDATE TICKET PRICE
+
+//             // User picked round trip ticket
+//             if (UsersMultipleFlightChoice.equals("Round trip ticket")) {
+//       
+//                // Verify that the ticket price has not already been altered
+//                if (TicketPrice == originalTicketPrice) {
+//                
+//                   TicketPrice = TicketPrice*2;
+//             
+//                }
+//                
+//              }
+//              
+//              
+//                         // User picked One way ticket
+//             if (UsersMultipleFlightChoice.equals("One way ticket")) {
+//       
+//                // Verify that the ticket price has not already been altered
+//                if (TicketPrice == originalTicketPrice*2) {
+//                // The user changed the ticket to one way so decrease the cost of the ticket
+//                   TicketPrice = originalTicketPrice;
+//             
+//                }
+//                
+//              }
+// 
+//       
+//       
+//                ThreadCreator thread2 = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, TicketPrice);
+//                // Generate a new thread
+//                thread2.generateANewThread();
+//                // Change the ticket price to the value we just calculated
+//                currentTicketPrice = TicketPrice;
+         }
+      }
       
       // This function will provide a neat graphical effect when the old ticket price
       // is not the same as the new ticket price
@@ -461,7 +526,7 @@ createView(userName);
 
             for (int i=oldTicketPrice; i>newTicketPrice-1; i--) {
             
-                  
+               // We need to ad a comma when the price is over 999 (NOT YET DONE)   
                label.setText("$" + i + "." + centD + centS);
                
                try {
@@ -495,5 +560,5 @@ createView(userName);
       
       }
 
-   
+   //MAKE A SET TICKET PRICE FUNCTION THAT CHECKS ALL OF THE MENU SELECTED OPTIONS AND THEN KNOWS THE APPROPRIATE TICKET PRICE
 }
