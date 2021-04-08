@@ -23,7 +23,7 @@ newTicketPrice = newTicketPriceIn;
 public void run() {
 
 // Cause the visual ticket change
-   ScheduleAFlightInterface.visualTicketChange(ourLabel, oldTicketPrice, newTicketPrice);
+   HelperMethodsForScheduleAFlightInterface.visualTicketChange(ourLabel, oldTicketPrice, newTicketPrice);
 
 // Kill this thread since it has done the task we needed
 stop();
