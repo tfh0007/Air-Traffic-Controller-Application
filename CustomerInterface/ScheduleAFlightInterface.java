@@ -125,7 +125,7 @@ createView(userName);
       PurchasePriceMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       PurchasePriceMsg.setForeground (Color.white);
       
-      PriceSoFarMsg = new JLabel("$0.00   " );
+      PriceSoFarMsg = new JLabel("$223.00   " );
       PriceSoFarMsg.setFont(new Font("Arial", Font.PLAIN, 50));
       PriceSoFarMsg.setForeground (Color.gray);
       
