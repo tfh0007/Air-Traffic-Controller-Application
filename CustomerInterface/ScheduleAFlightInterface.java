@@ -22,8 +22,10 @@ public class ScheduleAFlightInterface extends JFrame {
 public static String TheUser;
 
 // This is our startAirportCounter for the starting Airport decision in the menu
-private int startAirportCount = 0;
-private String usersStartAirport;
+// TicketPrice is the current price of the customers ticket. The ticket price will start at the lowest value possible
+// currentTicketPrice is the price of the ticket with our current selections
+private int startAirportCount = 0, TicketPrice=223, currentTicketPrice=223;
+private String usersStartAirport, usersDestinationAirport, UsersSeatChoice;
 
    // A list of all of our airports that can be used as arrival and destination locations
    // This array is causing an unsafe warning
@@ -35,6 +37,8 @@ private String[] airports = { "Airport1", "Airport2", "Airport3",
       "Airport4", "Airport5", "Airport6", "Airport7","Airport1", "Airport2", "Airport3",
       "Airport4", "Airport5", "Airport6", "Airport7" };
 
+   // A list of all of our seat choices that can be used by the customer
+private String[] seatChoice = { "Please select a seat Preference", "First-Class", "Business Class", "Premium Economy Class", "Economy Class" };
 
 
 // Grab a background image
@@ -51,7 +55,7 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
    // Note: JPasswordField uses a depreciated API but this should not be a serious concern
    private JPasswordField creditCardNumber;
    
-   private JComboBox menuForStartAirports;
+   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice;
 
 
 
@@ -133,12 +137,28 @@ createView(userName);
 
       menuForStartAirports.addActionListener(
          new menuForStartAirportsActionListener());
+         
+      menuForDestinationAirports = new JComboBox(airports);
+      menuForDestinationAirports.setSelectedIndex(0);
+      menuForDestinationAirports.setFont(new Font("Arial", Font.PLAIN, 30));
+
+      menuForDestinationAirports.addActionListener(
+         new menuForDestinationAirportsActionListener());
+         
+         
+            menuForSeatChoice = new JComboBox(seatChoice);
+      menuForSeatChoice.setSelectedIndex(0);
+      menuForSeatChoice.setFont(new Font("Arial", Font.PLAIN, 30));
+
+      menuForSeatChoice.addActionListener(
+         new menuForSeatChoiceActionListener());
+
       
             
 
       
       //Now lets make the right side of the screen
-      TicketResultsMsg = new JLabel("Here is you flight thus far" );
+      TicketResultsMsg = new JLabel("Here is your round trip flight thus far" );
       TicketResultsMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       TicketResultsMsg.setForeground (Color.white);
 
@@ -189,7 +209,7 @@ createView(userName);
           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
           
             //Lets do right side
-          TicketResultsMsg.setBounds(1000, 30, 1500, 200);
+          TicketResultsMsg.setBounds(900, 30, 1500, 200);
           
           //Our buttons
           logOut.setBounds(1, 1, 250, 60);
@@ -197,9 +217,10 @@ createView(userName);
           GoBack.setBounds(50, 800, 1500, 80);
           
           //Our menues
-          menuForStartAirports.setBounds(50, 150, 400, 200);
-          
-          
+          menuForStartAirports.setBounds(50, 190, 600, 50);
+          menuForDestinationAirports.setBounds(50, 360, 600, 50);
+          menuForSeatChoice.setBounds(50, 530, 600, 50);
+
           //Our text fields
           
           
@@ -214,6 +235,8 @@ createView(userName);
             
             // Now lets do our menues
             this.add(menuForStartAirports);
+            this.add(menuForDestinationAirports);
+            this.add(menuForSeatChoice);
 
             
             //Now lets do right side
@@ -282,4 +305,199 @@ createView(userName);
 
 
    }
+   
+        private class menuForDestinationAirportsActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+         JComboBox cb = (JComboBox)e.getSource();
+         usersDestinationAirport = (String)cb.getSelectedItem();
+
+         System.out.println("DEBUG: Option: " + usersDestinationAirport + " was just picked in the menu for destination airport");
+
+  
+      } 
+      }
+
+
+        public class menuForSeatChoiceActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+         JComboBox cb = (JComboBox)e.getSource();
+         UsersSeatChoice = (String)cb.getSelectedItem();
+         
+         // If we don't make a new thread here the interface will freeze instead of 
+         // giving us our number change animation
+         
+         
+         
+         
+         
+         
+         // Increase the prices based on seat upgrade
+            if (UsersSeatChoice.equals("First-Class")) {
+         
+            // User wants first class so increase price x4
+            // Change later to be cooler
+            
+               ThreadCreator thread = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, TicketPrice*4);
+               // Generate a new thread
+               thread.generateANewThread();
+               // Since we have displayed the change update our current Ticket Price
+               currentTicketPrice = TicketPrice*4;
+
+            }
+            
+            else if (UsersSeatChoice.equals("Business Class")) {
+         
+            
+            // User wants Business class so increase price x3
+            // Change later to be cooler
+            
+               ThreadCreator thread = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, TicketPrice*3);
+               // Generate a new thread
+               thread.generateANewThread();
+               // Since we have displayed the change update our current Ticket Price
+               currentTicketPrice = TicketPrice*3;
+
+               
+            }
+         
+            else if (UsersSeatChoice.equals("Premium Economy Class")) {
+         
+            
+            // User wants Business class so increase price x2
+            // Change later to be cooler
+               ThreadCreator thread = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, TicketPrice*2);
+               // Generate a new thread
+               thread.generateANewThread();
+               // Since we have displayed the change update our current Ticket Price
+               currentTicketPrice = TicketPrice*2;
+               
+            }
+         
+            else if (UsersSeatChoice.equals("Economy Class")) {
+         
+            
+            // User wants Economy class so price is the default
+            // Change later to be cooler
+            // we need to use casting to ensure that we only get integer values
+               ThreadCreator thread2 = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, TicketPrice);
+               // Generate a new thread
+               thread2.generateANewThread();
+           // Since we have displayed the change update our current Ticket Price
+               currentTicketPrice = TicketPrice;
+
+            }
+         
+
+               
+         
+         
+         
+
+         System.out.println("DEBUG: Option: " + UsersSeatChoice + " was just picked in the menu for seat choices");
+
+  
+      } 
+      }
+      
+      
+      // This function will provide a neat graphical effect when the old ticket price
+      // is not the same as the new ticket price
+      
+      public static void visualTicketChange(JLabel label, int oldTicketPrice, int newTicketPrice) {
+         
+         // When our ticket price increased use red text and increase the value
+         
+            // These will show the cent values on the screen
+               int centD = 0;
+               int centS = 0;
+
+         if (oldTicketPrice < newTicketPrice) {
+         
+            // Change the color to red to show higher cost   
+            label.setForeground (Color.red);
+            
+
+            for (int i=oldTicketPrice; i<newTicketPrice+1; i++) {
+
+                  
+               label.setText("$" + i + "." + centD + centS);
+               
+               try {
+                  Thread.sleep(15);
+               
+               }
+               catch (InterruptedException f) {
+                  System.out.println("An error occured while thread tried to sleep");
+               }
+               // Incriment the cent values 
+               centD++;
+               centS++;
+               // We can not have 1 digit over 9 so reset the values when either is 9 or more
+               if (centD >= 9)  {
+                  centD = 0;
+               }
+               if (centS >= 9) {
+                  centS = 0;
+               }
+
+            
+            }  
+            label.setForeground (Color.gray);
+                 
+         
+         }
+         
+            // When our ticket price decreased use green text and increase the value
+         else if (oldTicketPrice > newTicketPrice) {
+         
+            // Change the color to green to show lower cost   
+            label.setForeground (Color.green);
+
+            // These will show the cent values on the screen
+            
+            // Cent prices shoud decrease now since the cost is going down
+            
+            
+
+            for (int i=oldTicketPrice; i>newTicketPrice-1; i--) {
+            
+                  
+               label.setText("$" + i + "." + centD + centS);
+               
+               try {
+               Thread.sleep(15);
+               
+               }
+               catch (InterruptedException f) {
+               System.out.println("An error occured while thread tried to sleep");
+               }
+              
+              // Decrement the cent values 
+               centD--;
+               centS--;
+               // We can not have 1 digit under 0 so reset the values when either is 0 or less
+               if (centD <= 0)  {
+                  centD=9;
+               }
+               if (centS <= 0) {
+                  centS = 9;
+               }
+               
+               
+            }  
+            label.setForeground (Color.gray);
+
+         }
+         // Reset the value to the newTicketPrice Incase a bug happens
+
+         label.setText("$" + newTicketPrice + ".00");
+
+      
+      }
+
+   
 }
