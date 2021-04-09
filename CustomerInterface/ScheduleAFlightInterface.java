@@ -29,9 +29,7 @@ private String usersStartAirport, usersDestinationAirport, UsersSeatChoice, User
 
    // A list of all of our airports that can be used as arrival and destination locations
    // This array is causing an unsafe warning
-private String[] airports = { "Please select an airport", "Placeholder", "Placeholder",
-      "Placeholder", "Placeholder", "Placeholder", "Placeholder","Placeholder", "Placeholder", "Placeholder",
-      "Placeholder", "Placeholder", "Placeholder", "Placeholder","Placeholder", "End Placeholder" };
+private String[] airports = {};
 
    // A list of all of our seat choices that can be used by the customer
 private String[] seatChoice = { "First Class", "Business Class", "Premium Economy Class", "Economy Class" };
@@ -141,16 +139,32 @@ public ScheduleAFlightInterface(String userName) {
       
       // Lets make our menues
       //This causes an unsafe warning somehow 
+      
+      // We need to calculate the values that should be stored in our airports array
+      // We can use this same array for Start and Destination Airport
+      try {
+      airports = AirportInformationScanner.GatherListOfAirports();
+      
+      }
+      catch (FileNotFoundException f) {
+      System.out.println("An error occured while trying to access the airports.txt database");
+      }
+      
+      // We know that the first element in our array will be null since we specifed inside the function
+      // So we need to change index 0 to "Select an airport"
+      airports[0] = "Select an airport";
+      
       menuForStartAirports = new JComboBox(airports);
       menuForStartAirports.setSelectedIndex(0);
-      menuForStartAirports.setFont(new Font("Arial", Font.PLAIN, 30));
+      menuForStartAirports.setFont(new Font("Arial", Font.PLAIN, 20));
 
       menuForStartAirports.addActionListener(
          new menuForStartAirportsActionListener());
          
+         
       menuForDestinationAirports = new JComboBox(airports);
       menuForDestinationAirports.setSelectedIndex(0);
-      menuForDestinationAirports.setFont(new Font("Arial", Font.PLAIN, 30));
+      menuForDestinationAirports.setFont(new Font("Arial", Font.PLAIN, 20));
 
       menuForDestinationAirports.addActionListener(
          new menuForDestinationAirportsActionListener());

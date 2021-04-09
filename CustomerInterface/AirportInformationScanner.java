@@ -8,6 +8,9 @@ import java.nio.file.StandardOpenOption;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 
 // External Sources:
 // Used https://www.rgagnon.com/javadetails/java-0054.html to figure out how to append text to the end of a file
@@ -283,6 +286,127 @@ static String[] ReturnInfoOnAirport(String airportName)
   return airportInfo;
 
    }
+
+
+
+// Returns: An array containing all of the airports contained in the airports.txt database
+// The airports will start at index 1 since we do not want index zero to be set yet
+// Index 0 will be "Select an airport"
+static String[] GatherListOfAirports() throws FileNotFoundException {
+
+      String fileName = "../Databases/airports.txt";
+
+
+      // currentAirport represents the Name of the current airport we are reading in the file
+      String currentAirport = "";
+      // We will never know the needed size of our array so we have to make it a list first
+      List<String> airportInfo = new ArrayList<String>();
+      // We do not want the first value to be an airpor so initialize it to null
+      airportInfo.add(null);
+      
+
+      Scanner scanFile = new Scanner(new File(fileName));
+
+      System.out.println("Scanning" + fileName + " for airport details.");
+
+// We will view one airport for every cycle of this while so set an index accordingly
+   int airportIndex = 1;
+   while (scanFile.hasNext()) {
+   
+   // We are at a blank line
+   scanFile.nextLine();
+
+   // We are at airport name
+   currentAirport = scanFile.nextLine();
+   //System.out.println("DEBUG:" + currentName + " is the name of the user being read");
+
+
+   // We are at code now
+   scanFile.nextLine();
+   //System.out.println("DEBUG:" + currentPassword + " is the name of the password being read");
+
+   // We are at city now
+   scanFile.nextLine();
+   // System.out.println("DEBUG:" + currentEmail + " is the name of the email being read\n");
+
+   // Reading x coords
+   scanFile.nextLine();
+
+   // Reading y coords
+   scanFile.nextLine();
+
+   airportInfo.add(currentAirport);
+   // We are moving to a new airport so incrimet the airport index
+   
+   }
+// Convert our array list into an array so we can actually use it   
+   String[] airportArray = new String[airportInfo.size()];
+        airportArray = airportInfo.toArray(airportArray);
+
+      return airportArray;
+
+
+  }
+  
+
+// Returns: An array containing all of the airport locations contained in the airports.txt database
+// The airport locations will start at index 1 since we do not want index zero to be set yet
+// Index 0 will be used as a placeholder
+static String[] GatherListOfAirportLocations() throws FileNotFoundException {
+
+      String fileName = "../Databases/airports.txt";
+
+
+      // currentLocation represents the Name of the current airport we are reading in the file
+      String currentLocation = "";
+      // We will never know the needed size of our array so we have to make it a list first
+      List<String> airportLocationsInfo = new ArrayList<String>();
+      // We do not want the first value to be an airport location so initialize it to null
+      airportLocationsInfo.add(null);
+      
+
+      Scanner scanFile = new Scanner(new File(fileName));
+
+      System.out.println("Scanning" + fileName + " for airport details.");
+
+// We will view one airport for every cycle of this while so set an index accordingly
+   int airportIndex = 1;
+   while (scanFile.hasNext()) {
+   
+   // We are at a blank line
+   scanFile.nextLine();
+
+   // We are at airport name
+   scanFile.nextLine();
+   //System.out.println("DEBUG:" + currentName + " is the name of the user being read");
+
+
+   // We are at code now
+   scanFile.nextLine();
+   //System.out.println("DEBUG:" + currentPassword + " is the name of the password being read");
+
+   // We are at city now
+   currentLocation = scanFile.nextLine();
+   // System.out.println("DEBUG:" + currentEmail + " is the name of the email being read\n");
+
+   // Reading x coords
+   scanFile.nextLine();
+
+   // Reading y coords
+   scanFile.nextLine();
+
+   airportLocationsInfo.add(currentLocation);
+   // We are moving to a new airport so incrimet the airport index
+   
+   }
+// Convert our array list into an array so we can actually use it   
+   String[] airportLocationArray = new String[airportLocationsInfo.size()];
+        airportLocationArray = airportLocationsInfo.toArray(airportLocationArray);
+
+      return airportLocationArray;
+
+
+  }
 
 
 }
