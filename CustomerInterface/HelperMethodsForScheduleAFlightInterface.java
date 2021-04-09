@@ -25,10 +25,34 @@ public class HelperMethodsForScheduleAFlightInterface {
             for (int i=oldTicketPrice; i<newTicketPrice+1; i++) {
 
                   
+            // We do not want to update cent values when the numbers move to slowly
+               if (newTicketPrice-i < 4)
+               {
+                  label.setText("$" + i + ".00");
+               }
+               else {
+            
+               // We need to ad a comma when the price is over 999 (NOT YET DONE)   
                label.setText("$" + i + "." + centD + centS);
+               }
                
                try {
-                  Thread.sleep(15);
+               
+               // Make the ticket price move fast or slow depending on the difference in value between our current
+               // ticket price (i) and the new ticket price
+               
+               if (newTicketPrice-i > 500)
+                  Thread.sleep(1);
+                  
+               else if (newTicketPrice-i > 250)
+                  Thread.sleep(3);
+                  
+               else if (newTicketPrice-i > 50)
+                  Thread.sleep(6);
+               else if (newTicketPrice-i > 3)
+                  Thread.sleep(12);
+               else 
+                  Thread.sleep(100);
                
                }
                catch (InterruptedException f) {
@@ -66,11 +90,33 @@ public class HelperMethodsForScheduleAFlightInterface {
 
             for (int i=oldTicketPrice; i>newTicketPrice-1; i--) {
             
+            // We do not want to update cent values when the numbers move to slowly
+               if (i-newTicketPrice < 4)
+               {
+                  label.setText("$" + i + ".00");
+               }
+               else {
+            
                // We need to ad a comma when the price is over 999 (NOT YET DONE)   
                label.setText("$" + i + "." + centD + centS);
+               }
                
                try {
-               Thread.sleep(15);
+               // Make the ticket price move fast or slow depending on the difference in value between our new
+               // ticket price and the current ticket price(i) (new ticket price is smaller)
+               
+               if (i-newTicketPrice > 500)
+                  Thread.sleep(1);
+                  
+               else if (i-newTicketPrice > 250)
+                  Thread.sleep(3);
+                  
+               else if (i-newTicketPrice > 50)
+                  Thread.sleep(6);
+               else if (i-newTicketPrice > 3)
+                  Thread.sleep(12);
+               else 
+                  Thread.sleep(100);
                
                }
                catch (InterruptedException f) {
@@ -120,7 +166,7 @@ public class HelperMethodsForScheduleAFlightInterface {
       }
       
 // Lets handle Airport choice
-      if (!usersStartAirport.equals(usersDestinationAirport)) {
+      if (!usersStartAirport.equals(usersDestinationAirport) || !usersDestinationAirport.equals(usersStartAirport)) {
          //Since there airports are not the same we can continue
          
          

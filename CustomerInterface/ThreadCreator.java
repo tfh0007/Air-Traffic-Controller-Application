@@ -33,8 +33,6 @@ public void run() {
    System.out.println("ERROR: A thread was halted while trying to sleep");
    }
    
-// The reason to run this again is to ensure that if the user spams buttons the right output will be displayed afterwords   
-   HelperMethodsForScheduleAFlightInterface.visualTicketChange(ourLabel, newTicketPrice, newTicketPrice);
  
 
 // Kill this thread since it has done the task we needed

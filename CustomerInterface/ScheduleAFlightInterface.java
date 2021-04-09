@@ -330,7 +330,15 @@ public ScheduleAFlightInterface(String userName) {
          JComboBox cb = (JComboBox)e.getSource();
          usersStartAirport = (String)cb.getSelectedItem();
          
+         // In order to use .equals below neither parameter can be null
+         if (usersStartAirport == null) {
+            return;
+            }
          
+         // Since this check is not working in the Helper methods for schedule a flight lets try it here
+         if (usersStartAirport.equals(usersDestinationAirport)) {
+            return;
+         }
                            // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
          newTicketPrice = 0;
          // Set up the new ticket price based on all of the user's choices thus far
@@ -361,10 +369,20 @@ public ScheduleAFlightInterface(String userName) {
         private class menuForDestinationAirportsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+        
+         
+   
          JComboBox cb = (JComboBox)e.getSource();
          usersDestinationAirport = (String)cb.getSelectedItem();
          
+         // In order to use .equals below neither parameter can be null
+         if (usersDestinationAirport == null) {
+            return;
+            }
+         // Since this check is not working in the Helper methods for schedule a flight lets try it here
+         if (usersDestinationAirport.equals(usersStartAirport)) {
+            return;
+         }
          
                   // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
          newTicketPrice = 0;
@@ -383,7 +401,6 @@ public ScheduleAFlightInterface(String userName) {
          
          // Now we need to update our currentTicketPrice to the new ticket price
          currentTicketPrice = newTicketPrice;
-
 
          System.out.println("DEBUG: Option: " + usersDestinationAirport + " was just picked in the menu for destination airport");
 
