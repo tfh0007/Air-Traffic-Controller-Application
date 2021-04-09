@@ -39,6 +39,8 @@ private String[] seatChoice = { "First Class", "Business Class", "Premium Econom
    // A list of all of our multiple flight choices
 private String[] multipleFlightChoice = { "Round trip ticket","One way ticket"};
 
+
+
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgroundLarge.jpg");
 

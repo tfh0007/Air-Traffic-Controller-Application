@@ -25,6 +25,18 @@ public void run() {
 // Cause the visual ticket change
    HelperMethodsForScheduleAFlightInterface.visualTicketChange(ourLabel, oldTicketPrice, newTicketPrice);
 
+// We need to wait a little while
+   try {
+   Thread.sleep(1000);
+   }
+   catch (InterruptedException f) {
+   System.out.println("ERROR: A thread was halted while trying to sleep");
+   }
+   
+// The reason to run this again is to ensure that if the user spams buttons the right output will be displayed afterwords   
+   HelperMethodsForScheduleAFlightInterface.visualTicketChange(ourLabel, newTicketPrice, newTicketPrice);
+ 
+
 // Kill this thread since it has done the task we needed
 stop();
 
