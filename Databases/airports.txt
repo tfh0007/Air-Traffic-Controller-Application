@@ -9,7 +9,7 @@ Hartsfield-Jackson Atlanta International Airport
 ATL
 Atlanta, GA
 33.6407 N
-84.4277 w
+84.4277 W
 
 Ronald Reagan Washington National Airport
 DCA

@@ -329,6 +329,26 @@ public ScheduleAFlightInterface(String userName) {
 
          JComboBox cb = (JComboBox)e.getSource();
          usersStartAirport = (String)cb.getSelectedItem();
+         
+         
+                           // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
+         newTicketPrice = 0;
+         // Set up the new ticket price based on all of the user's choices thus far
+          newTicketPrice = HelperMethodsForScheduleAFlightInterface.SetTicketPrice(originalTicketPrice,
+                           usersStartAirport,usersDestinationAirport,UsersSeatChoice,
+                           UsersMultipleFlightChoice);
+ 
+         
+         // If we don't make a new thread here the interface will freeze instead of 
+         // giving us our number change animation
+         // We are visually showing the current ticket price change into the new ticket price
+         ThreadCreator thread2 = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, newTicketPrice);
+         // Generate a new thread
+         thread2.generateANewThread();
+         
+         // Now we need to update our currentTicketPrice to the new ticket price
+         currentTicketPrice = newTicketPrice;
+
 
          System.out.println("DEBUG: Option: " + usersStartAirport + " was just picked in the menu for start airport");
 
@@ -344,6 +364,26 @@ public ScheduleAFlightInterface(String userName) {
 
          JComboBox cb = (JComboBox)e.getSource();
          usersDestinationAirport = (String)cb.getSelectedItem();
+         
+         
+                  // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
+         newTicketPrice = 0;
+         // Set up the new ticket price based on all of the user's choices thus far
+          newTicketPrice = HelperMethodsForScheduleAFlightInterface.SetTicketPrice(originalTicketPrice,
+                           usersStartAirport,usersDestinationAirport,UsersSeatChoice,
+                           UsersMultipleFlightChoice);
+ 
+         
+         // If we don't make a new thread here the interface will freeze instead of 
+         // giving us our number change animation
+         // We are visually showing the current ticket price change into the new ticket price
+         ThreadCreator thread2 = new ThreadCreator(PriceSoFarMsg, currentTicketPrice, newTicketPrice);
+         // Generate a new thread
+         thread2.generateANewThread();
+         
+         // Now we need to update our currentTicketPrice to the new ticket price
+         currentTicketPrice = newTicketPrice;
+
 
          System.out.println("DEBUG: Option: " + usersDestinationAirport + " was just picked in the menu for destination airport");
 

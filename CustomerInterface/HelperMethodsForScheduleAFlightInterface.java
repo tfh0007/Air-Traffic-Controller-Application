@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class HelperMethodsForScheduleAFlightInterface {
 
@@ -110,16 +111,108 @@ public class HelperMethodsForScheduleAFlightInterface {
                      
       // We want the new ticket price to be the original before we collect all of the changes               
       double newTicketPrice = originalTicketPrice;
+      // Make sure our values are not null. If they are null make them ""
+      if (usersStartAirport == null || usersDestinationAirport == null) {
+         usersStartAirport = "";
+         usersDestinationAirport = "";
       
       
-      // >>>>>>>>>>>>>>>>>>>>Fill out check for usersStartAirport
+      }
       
-      // >>>>>>>>>>>>>>>>>>>>Fill out check for usersDestinationAirport                
+// Lets handle Airport choice
+      if (!usersStartAirport.equals(usersDestinationAirport)) {
+         //Since there airports are not the same we can continue
+         
+         
+         // Since neither airport is set default or equals the airport we can continue
+            if (!usersStartAirport.equals("Select an airport") || usersDestinationAirport.equals("Select an airport")) {
+            
+            // We need to retrieve more information on the start and destination airport
+            String[] infoOnStartAirport;
+            String[] infoOnDestinationAirport;
+            
+            // Lets gather the info on these two airports
+            try {
+               infoOnStartAirport = AirportInformationScanner.ReturnInfoOnAirport(usersStartAirport);
+               infoOnDestinationAirport = AirportInformationScanner.ReturnInfoOnAirport(usersDestinationAirport);
+            // These have to go in the try block otherwise compile error since we may not have gathered
+            // data on our airports
+            // Since we can't use string.contains with an array we have to convert the values
+            // that we need.
+
+               String startlat = infoOnStartAirport[3];
+               String endlat = infoOnDestinationAirport[3];
+            
+               // Now we can test if we should increase price or not with latitude
+               if(!startlat.contains("N") || !endlat.contains("N")) {
+               
+               // Do nothing we are good so far. We do not have two N's
+               
+                  if (!startlat.contains("S") || !endlat.contains("S")) {
+                  
+                  // Do nothing we are good so far. We do not have two N's 
+                  // We do not have two S's
+                     if (!startlat.contains("E") || !endlat.contains("E")) {
+                  
+                     // Do nothing we are good so far. We do not have two N's
+                     // We do not have two S's. We do not have two E's
+                     
+                        if (!startlat.contains("W") || !endlat.contains("W")) {
+                        // Now we need to act. The latitudes for start and end do 
+                        // not match so increase price
+                           newTicketPrice = newTicketPrice*2;
+                     
+                        }
+                  
+                     }  
+                  }
+               
+               }
+               
+               String startlon = infoOnStartAirport[4];
+               String endlon = infoOnDestinationAirport[4];
+
+               
+               
+               // Now we can test if we should increase price or not with longitude
+               if(!startlon.contains("N") || !endlon.contains("N")) {
+               
+               // Do nothing we are good so far. We do not have two N's
+               
+                  if (!startlon.contains("S") || !endlon.contains("S")) {
+                  
+                  // Do nothing we are good so far. We do not have two N's 
+                  // We do not have two S's
+                     if (!startlon.contains("E") || !endlon.contains("E")) {
+                  
+                     // Do nothing we are good so far. We do not have two N's
+                     // We do not have two S's. We do not have two E's
+                     
+                        if (!startlon.contains("W") || !endlon.contains("W")) {
+                        // Now we need to act. The longitudes for start and end do 
+                        // not match so increase price
+                           newTicketPrice = newTicketPrice*2;
+                     
+                        }
+                  
+                     }  
+                  }
+               
+               }
+
+            }
+            catch (FileNotFoundException f) {
+            System.out.print("An error occured while trying to access the airports.txt database");
+            }
+            
+         
+            }
       
+           }
       
 // Lets handle Seat choice
          // Increase the prices based on seat upgrade
-         if (UsersSeatChoice.equals("First Class")) {
+          if (UsersSeatChoice.equals("First Class")) {
          
             // User wants first class so increase price x3
                newTicketPrice = newTicketPrice*4;
