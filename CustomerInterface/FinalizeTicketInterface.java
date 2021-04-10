@@ -27,7 +27,7 @@ public class FinalizeTicketInterface extends JFrame{
                   destinationAirportLocation, userSeatChoiceMsg, UserRoundorSingletripMsg, ticketTypeMsg, flightTimeMsg, dividerMsg, paymentInfoMsg, InitialflightPriceMsg,
                   flightDistancePremiumMsg,SeatChoicePremiumMsg,multiWayFlightPremiumMsg,divider2Msg,finalPriceWithoutTaxMsg,taxAmountMsg,totalAmuontUserOwesMsg;
    
-   private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice; 
+   private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice, completeUserFlightDate; 
    
    private double originalticketPrice, finalticketPrice;
  
@@ -35,9 +35,10 @@ public class FinalizeTicketInterface extends JFrame{
    // we need a lot of inputs for every entry field on the Schedule a flight interface as well as the customers name and the final cost
    // of the customers flight(s)
    public FinalizeTicketInterface(String TheUserIn,String usersStartAirportIn, String usersDestinationAirportIn,String UsersSeatChoiceIn, 
-                     String UsersMultipleFlightChoiceIn, int originalticketPriceIn, int finalticketPriceIn,String UsersFlightTimeChoiceIn) {
+                     String UsersMultipleFlightChoiceIn, int originalticketPriceIn, int finalticketPriceIn,String UsersFlightTimeChoiceIn,
+                     String completeUserFlightDateIn) {
      
-     // Lets initialize all of our input values from the Schedule a flight interface               
+     // Lets initialize all of our input values               
       TheUser = TheUserIn;
       usersStartAirport = usersStartAirportIn;
       usersDestinationAirport = usersDestinationAirportIn;
@@ -45,7 +46,8 @@ public class FinalizeTicketInterface extends JFrame{
       UsersMultipleFlightChoice = UsersMultipleFlightChoiceIn;
       originalticketPrice = originalticketPriceIn;
       finalticketPrice = finalticketPriceIn;
-      UsersFlightTimeChoice = UsersFlightTimeChoiceIn;                    
+      UsersFlightTimeChoice = UsersFlightTimeChoiceIn;
+      completeUserFlightDate = completeUserFlightDateIn;                    
                      
       createView();
       
@@ -122,7 +124,7 @@ public class FinalizeTicketInterface extends JFrame{
       flightTimeMsg = new JLabel();
       flightTimeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       flightTimeMsg.setForeground (Color.white);
-      flightTimeMsg = new JLabel("Your flight is scheduled for: "  + "INSERT THE ACTUAL DATE HERE" + " at " + UsersFlightTimeChoice);
+      flightTimeMsg = new JLabel("Your flight is scheduled for: "  + completeUserFlightDate + " at " + UsersFlightTimeChoice);
       
       
       

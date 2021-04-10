@@ -67,11 +67,11 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
    
    private JLabel initialAirportMsg, FinalAirportMsg, startAirportInvalidMsg, destinationAirportInvalidMsg, SeatPreference, 
                   PurchasePriceMsg, PriceSoFarMsg, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,
-                  TimeOfFlightMsg, TicketPurchasePriceMsg, timeSelectionMsg, finalTicketInvalidMsg;
+                  TimeOfFlightMsg, TicketPurchasePriceMsg, userDateSelectionMsg, dateFormatMsg, userDateInvalidMsg, timeSelectionMsg, finalTicketInvalidMsg;
    
    
    // This represents the field that will assign a particular date to our flight
-   private JTextField DateOfFlight;
+   private JTextField monthOfFlight,dayOfFlight,yearOfFlight;
    
    private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight, menuForDateSelection, menuForFlightTime;
 
@@ -240,10 +240,28 @@ public ScheduleAFlightInterface(String userName) {
       timeSelectionMsg = new JLabel("Please select a time for your flight" );
       timeSelectionMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       timeSelectionMsg.setForeground (Color.white);
-
+      
+      userDateSelectionMsg = new JLabel("Please give a date and time for your flight" );
+      userDateSelectionMsg.setFont(new Font("Arial", Font.PLAIN, 30));
+      userDateSelectionMsg.setForeground (Color.white);
+      
+      dateFormatMsg = new JLabel("MM     DD      YYYY");
+      dateFormatMsg.setFont(new Font("Arial", Font.PLAIN, 22));
+      dateFormatMsg.setForeground (Color.white);
 
       
+      userDateInvalidMsg = new JLabel();
+      userDateInvalidMsg.setFont(new Font("Arial", Font.PLAIN, 30));
+      userDateInvalidMsg.setForeground (Color.red);
       
+      monthOfFlight = new JTextField();
+      monthOfFlight.setFont(new Font("Arial", Font.PLAIN, 34));
+      
+      dayOfFlight = new JTextField();
+      dayOfFlight.setFont(new Font("Arial", Font.PLAIN, 34));
+      
+      yearOfFlight = new JTextField();
+      yearOfFlight.setFont(new Font("Arial", Font.PLAIN, 34));
 
       
                          
@@ -291,21 +309,23 @@ public ScheduleAFlightInterface(String userName) {
           
           //Our labels
           initialAirportMsg.setBounds(50, 30, 1500, 200);
-          startAirportInvalidMsg.setBounds(50, 170, 1500, 200);
+          startAirportInvalidMsg.setBounds(50, 170, 1000, 200);
           
           FinalAirportMsg.setBounds(50, 200, 1500, 200);
-          destinationAirportInvalidMsg.setBounds(50, 340, 1500, 200);
+          destinationAirportInvalidMsg.setBounds(50, 340, 1000, 200);
           
           SeatPreference.setBounds(50, 370, 1500, 200);
-          PurchasePriceMsg.setBounds(50, 540, 1500, 200);
-          PriceSoFarMsg.setBounds(50, 625, 1500, 200);
-
-          finalTicketInvalidMsg.setBounds(840, 630, 1500, 200);
+        PurchasePriceMsg.setBounds(50, 540, 1500, 200);
+           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
+      
+   finalTicketInvalidMsg.setBounds(840, 630, 1500, 200);
           
           
             //Lets do right side
           TicketResultsMsg.setBounds(880, 30, 1500, 200);
-          timeSelectionMsg.setBounds(880, 200, 1500, 200);
+         userDateSelectionMsg.setBounds(880, 200, 1500, 200);
+                dateFormatMsg.setBounds(880, 340, 1500, 200);
+          userDateInvalidMsg.setBounds(880, 380, 1500, 200);
           
           //Our buttons
           logOut.setBounds(1, 1, 250, 60);
@@ -317,9 +337,13 @@ public ScheduleAFlightInterface(String userName) {
     menuForDestinationAirports.setBounds(50, 360, 600, 50);
              menuForSeatChoice.setBounds(50, 530, 600, 50);
          menuForMultipleFlight.setBounds(880, 190, 600, 50);
-             menuForFlightTime.setBounds(880, 360, 600, 50);
+             menuForFlightTime.setBounds(1170, 360, 270, 55);
 
           //Our text fields
+          
+                 monthOfFlight.setBounds(880,360,70,55);
+                 dayOfFlight.setBounds(950,360,70,55);
+                 yearOfFlight.setBounds(1020,360,140,55);
           
           
                
@@ -340,7 +364,6 @@ public ScheduleAFlightInterface(String userName) {
             this.add(menuForDestinationAirports);
             this.add(menuForSeatChoice);
             this.add(menuForMultipleFlight);
-            this.add(timeSelectionMsg);
             this.add(menuForFlightTime);
             
             //Now lets do right side
@@ -349,7 +372,12 @@ public ScheduleAFlightInterface(String userName) {
             this.add(logOut);
             this.add(GoBack);
             this.add(PrintOutYourTicket);
-              
+            this.add(userDateSelectionMsg);
+            this.add(dateFormatMsg);
+            this.add(monthOfFlight);
+            this.add(dayOfFlight);
+            this.add(yearOfFlight);
+            this.add(userDateInvalidMsg);
    
    }
 
@@ -407,21 +435,42 @@ public ScheduleAFlightInterface(String userName) {
       // We need to check that all fields are filled in before the ticket result interface can work
       if (TheUser == null || usersStartAirport == null || usersDestinationAirport == null || UsersSeatChoice == null || UsersMultipleFlightChoice == null || UsersFlightTimeChoice == null) {
       
-         finalTicketInvalidMsg.setText("**One or more of your entries is invalid**");
+         finalTicketInvalidMsg.setText("**One or more of your entries was invalid**");
          return;
          }
       if (usersStartAirport.equals("Select an airport") || usersDestinationAirport.equals("Select an airport") || usersStartAirport.equals(usersDestinationAirport)) {
       
-         finalTicketInvalidMsg.setText("**One or more of your entries is invalid**");
+         finalTicketInvalidMsg.setText("**One or more airport entries is invalid**");
          return;
          }
+      // Now lets check that the date is valid
+      // First lets gather what the user has typed for the date pieces
+      
+      String monthOfUserFlight = monthOfFlight.getText();
+      String dayOfUserFlight = dayOfFlight.getText();
+      String yearOfUserFlight = yearOfFlight.getText();
+      
+      boolean dateTest = HelperMethodsForScheduleAFlightInterface.compareTodayWithUserDate(finalTicketInvalidMsg,monthOfUserFlight,
+                         dayOfUserFlight,yearOfUserFlight);
+      // If the users date is not a valid date we can not continue
+      // The helper message will display the error to our user                   
+      if (dateTest == false) {
+      
+         return;
+      }                     
+         
+         
+         
       
       // We made it past the check conditions so get rid of any error message here
          finalTicketInvalidMsg.setText("                                           ");
+         
+      // We want to make things simple so we will just send the entire date, instead of the pieces, to the finalize ticket interface   
+      String completeUserFlightDate = (monthOfUserFlight + "/" + dayOfUserFlight + "/" + yearOfUserFlight);
 
       FinalizeTicketInterface frame6;
       frame6 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
-                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice);
+                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice,completeUserFlightDate);
       
       }
    }

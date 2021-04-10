@@ -2,6 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+//External Sources:
+// Used https://www.baeldung.com/java-string-to-date 
+// as well as https://www.javatpoint.com/java-get-current-date
+//to find out how to get the current date and compare if with another date based on user input
+
+
 public class HelperMethodsForScheduleAFlightInterface {
 
 
@@ -517,4 +528,60 @@ return result;
 
 
 }
+
+// This function will test an inputted date with Today's current date
+// If The inputed date is illegally formatted such as when year is impossible, day is impossible, month is impossible, etc
+// then false will be returned
+// False will also be returned if the inputed date is not after Today's date
+  public static boolean compareTodayWithUserDate(JLabel label, String month,String day,String year) {    
+   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-YYYY");  
+   LocalDate now = LocalDate.now();
+   LocalDate inputDate;
+   System.out.println(dtf.format(now)); 
+   
+   // We need to compare two diffrent dates (The current date with the customer's picked date
+   
+      String UserDate = year + "-" + month + "-" + day;
+      
+      // Reset the error message back to nothing since we do not know if the date is valid or not yet
+      label.setText("                                                   ");
+   
+  
+      try {
+   
+         inputDate = LocalDate.parse(UserDate);
+   
+   
+         if (now.isBefore(inputDate)) {
+         
+         // This is the case we want/need
+            // Since the date is formated correctly get rid of any erro message
+            label.setText("                                                   ");
+            System.out.println("DEBUG: Date of now: " + dtf.format(now) + " is before the user's selected date: " + dtf.format(inputDate));
+            return true;
+
+         }
+         else if (now.isAfter(inputDate) || now.isEqual(inputDate)) {
+         
+            // The  user date is not a valid entry so inform the user
+            label.setText("**Your date has to be in the future**");
+            System.out.println("DEBUG: Uh oh: Your flight has to be in the future");
+            return false;
+         }
+       }
+  
+        catch (DateTimeParseException f) {
+        
+            // The  user date is not a valid entry so inform the user
+            label.setText("**Your date is not a valid date**");
+            System.out.println("DEBUG: Date format of inputDate was illegal");
+            return false;
+   
+        }
+     // we should never get here but in case we do something wrong happened 
+            System.out.println("WARNING: There was an issue that occured while trying to compare Today's and the user's date");
+     return false;
+  
+      }
+
 }
