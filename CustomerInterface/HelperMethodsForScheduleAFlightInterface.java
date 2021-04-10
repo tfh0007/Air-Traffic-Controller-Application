@@ -312,6 +312,208 @@ public class HelperMethodsForScheduleAFlightInterface {
 // Since we currently have a double we have to convert it to int
 return (int)newTicketPrice;
 
+}
+
+
+/*
+ Needs a lot of inputs including every menu selected item, current ticket price, original ticket price
+ This method will create an array of all of the ticket primiums associated with every choice the user made for their final ticket
+ Returns an array containing all of the ticket primiums placed into the following sections of the array
+
+
+ result[0] contains Airports distance Primium
+ result[1] contains Seat Choice Premium 
+ result[2] contains multiWay Flight Premium
+ */
+ 
+   public static double[] CalculateTicketPrimiums(int originalTicketPrice, String usersStartAirport,String 
+                     usersDestinationAirport,String UsersSeatChoice,String 
+                     UsersMultipleFlightChoice) {
+         
+      // This array will sotre our results of the premiums once we calculate them
+      // We initialize everything to zero because we will assume no primiums per index until we find evidence to have them
+      double [] result = {0,0,0};   
+      
+                     
+      // We want the new ticket price to be the original before we collect all of the changes               
+      double newTicketPrice = originalTicketPrice;
+      
+      
+      // Make sure our values are not null. If they are null make them ""
+      if (usersStartAirport == null || usersDestinationAirport == null) {
+         usersStartAirport = "";
+         usersDestinationAirport = "";
+      
+      
+      }
+      
+// Lets handle Airport choice
+      if (!usersStartAirport.equals(usersDestinationAirport)) {
+         //Since there airports are not the same we can continue
+         
+         
+         // Since neither airport is set default or equals the airport we can continue
+            if (!usersStartAirport.equals("Select an airport") || usersDestinationAirport.equals("Select an airport")) {
+            
+            // We need to retrieve more information on the start and destination airport
+            String[] infoOnStartAirport;
+            String[] infoOnDestinationAirport;
+            
+            // Lets gather the info on these two airports
+            try {
+               infoOnStartAirport = AirportInformationScanner.ReturnInfoOnAirport(usersStartAirport);
+               infoOnDestinationAirport = AirportInformationScanner.ReturnInfoOnAirport(usersDestinationAirport);
+            // These have to go in the try block otherwise compile error since we may not have gathered
+            // data on our airports
+            // Since we can't use string.contains with an array we have to convert the values
+            // that we need.
+
+               String startlat = infoOnStartAirport[3];
+               String endlat = infoOnDestinationAirport[3];
+            
+               // Now we can test if we should increase price or not with latitude
+               if(!startlat.contains("N") || !endlat.contains("N")) {
+               
+               // Do nothing we are good so far. We do not have two N's
+               
+                  if (!startlat.contains("S") || !endlat.contains("S")) {
+                  
+                  // Do nothing we are good so far. We do not have two N's 
+                  // We do not have two S's
+                     if (!startlat.contains("E") || !endlat.contains("E")) {
+                  
+                     // Do nothing we are good so far. We do not have two N's
+                     // We do not have two S's. We do not have two E's
+                     
+                        if (!startlat.contains("W") || !endlat.contains("W")) {
+                        // Now we need to act. The latitudes for start and end do 
+                        // not match so increase price
+                        
+                           // We can add the distance premium too our result array
+                           result[0] += newTicketPrice*2 - newTicketPrice;
+                        
+                           newTicketPrice = newTicketPrice*2;
+                     
+                        }
+                  
+                     }  
+                  }
+               
+               }
+               
+               String startlon = infoOnStartAirport[4];
+               String endlon = infoOnDestinationAirport[4];
+
+               
+               
+               // Now we can test if we should increase price or not with longitude
+               if(!startlon.contains("N") || !endlon.contains("N")) {
+               
+               // Do nothing we are good so far. We do not have two N's
+               
+                  if (!startlon.contains("S") || !endlon.contains("S")) {
+                  
+                  // Do nothing we are good so far. We do not have two N's 
+                  // We do not have two S's
+                     if (!startlon.contains("E") || !endlon.contains("E")) {
+                  
+                     // Do nothing we are good so far. We do not have two N's
+                     // We do not have two S's. We do not have two E's
+                     
+                        if (!startlon.contains("W") || !endlon.contains("W")) {
+                        
+                           // We can add the distance premium too our result array
+                           // We can not add distance yet because the the last 4 ifs may have been true so our value will be wrong
+                           // The solution is to add the result to our previous result
+                           result[0] += newTicketPrice*2 - newTicketPrice;
+                           
+                        // Now we need to act. The longitudes for start and end do 
+                        // not match so increase price
+                           newTicketPrice = newTicketPrice*2;
+                           
+                     
+                        }
+                  
+                     }  
+                  }
+               
+               }
+
+            }
+            catch (FileNotFoundException f) {
+            System.out.print("An error occured while trying to access the airports.txt database");
+            }
+            
+         
+            }
+      
+           }
+      
+// Lets handle Seat choice
+         // Increase the prices based on seat upgrade
+          if (UsersSeatChoice.equals("First Class")) {
+         
+            // We can add the seat choice premium too our result array
+               result[1] += newTicketPrice*4 - newTicketPrice;
+               
+            // User wants first class so increase price x3
+               newTicketPrice = newTicketPrice*4;
+               
+
+            }
+            
+            else if (UsersSeatChoice.equals("Business Class")) {
+         
+ 
+            // We can add the seat choice premium too our result array
+               result[1] += newTicketPrice*3 - newTicketPrice;
+               
+            // User wants Business Class so increase price x2
+               newTicketPrice = newTicketPrice*3;
+               
+               
+            }
+         
+            else if (UsersSeatChoice.equals("Premium Economy Class")) {
+         
+            // We can add the seat choice premium too our result array
+               result[1] += newTicketPrice*1.5 - newTicketPrice;
+               
+               
+            // User wants Business Class so increase price x3
+               newTicketPrice = newTicketPrice*1.5;
+               
+               
+            }
+         
+         
+            // If User wants Economy Class the price stays the same
+            // so do nothing
+
+
+            
+// Lets handle multipleFlightChoice
+      
+            if (UsersMultipleFlightChoice.equals("Round trip ticket")) {
+ 
+            // We can add the seat choice premium too our result array
+               result[2] += newTicketPrice*1.5 - newTicketPrice;
+      
+               // User wants a Round Trip ticket so increase price x1.5
+                  newTicketPrice = newTicketPrice*1.5;
+                  
+            
+               
+             }
+             
+             
+              // If User picked One way ticket the price stays the same
+              // so do nothing
+                        
+      
+                     
+
+return result;
 
 
 }

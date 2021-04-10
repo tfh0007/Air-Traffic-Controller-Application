@@ -52,7 +52,7 @@ public class FinalizeTicketInterface extends JFrame{
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
-      setSize(700, 900);
+      setSize(580, 700);
       //Center the frame to middle of screen
       setLocationRelativeTo(null);
       //Disable resize
@@ -72,105 +72,107 @@ public class FinalizeTicketInterface extends JFrame{
       panel.setLayout(null);
       
       TicketInfoOnUser = new JLabel();
-      TicketInfoOnUser.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      TicketInfoOnUser.setFont(new Font("SansSerif", Font.PLAIN, 22));
       TicketInfoOnUser.setForeground (Color.white);
       TicketInfoOnUser = new JLabel("Ticket for customer: " + TheUser);
       
       
       startAirportNameMsg = new JLabel();
-      startAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      startAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       startAirportNameMsg.setForeground (Color.white);
-      startAirportNameMsg = new JLabel("Starting Airport Name: " + usersStartAirport);
+      startAirportNameMsg = new JLabel("Start Airport: " + usersStartAirport);
       
       startAirportcode = new JLabel();
-      startAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      startAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
       startAirportcode.setForeground (Color.white);
       startAirportcode = new JLabel();
       
       startAirportLocation = new JLabel();
-      startAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      startAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
       startAirportLocation.setForeground (Color.white);
       startAirportLocation = new JLabel();
 
       
       destinationAirportNameMsg = new JLabel();
-      destinationAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      destinationAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       destinationAirportNameMsg.setForeground (Color.white);
-      destinationAirportNameMsg = new JLabel("Destination Airport Name: " + usersDestinationAirport);
+      destinationAirportNameMsg = new JLabel("Destination Airport: " + usersDestinationAirport);
       
       destinationAirportcode = new JLabel();
-      destinationAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      destinationAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
       destinationAirportcode.setForeground (Color.white);
       destinationAirportcode = new JLabel();
       
       destinationAirportLocation = new JLabel();
-      destinationAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      destinationAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
       destinationAirportLocation.setForeground (Color.white);
       destinationAirportLocation = new JLabel();
  
       userSeatChoiceMsg = new JLabel();
-      userSeatChoiceMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      userSeatChoiceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       userSeatChoiceMsg.setForeground (Color.white);
       userSeatChoiceMsg = new JLabel("Seat choice for flight: " + UsersSeatChoice);
       
       ticketTypeMsg = new JLabel();
-      ticketTypeMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      ticketTypeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       ticketTypeMsg.setForeground (Color.white);
-      ticketTypeMsg = new JLabel("This ticket: is a "  + UsersMultipleFlightChoice);
+      ticketTypeMsg = new JLabel("This ticket is a: "  + UsersMultipleFlightChoice);
       
       
       dividerMsg = new JLabel();
-      dividerMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      dividerMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       dividerMsg.setForeground (Color.white);
       dividerMsg = new JLabel("__________________________________________________");
    
       paymentInfoMsg = new JLabel();
-      paymentInfoMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      paymentInfoMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       paymentInfoMsg.setForeground (Color.white);
       paymentInfoMsg = new JLabel("Transaction details for this flight");
       
       InitialflightPriceMsg = new JLabel();
-      InitialflightPriceMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      InitialflightPriceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       InitialflightPriceMsg.setForeground (Color.white);
-      InitialflightPriceMsg = new JLabel("Base price of a ticket: $ " + originalticketPrice + ".00");
+      InitialflightPriceMsg = new JLabel("Base price of a ticket: $ " + originalticketPrice);
       
       flightDistancePremiumMsg = new JLabel();
-      flightDistancePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      flightDistancePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       flightDistancePremiumMsg.setForeground (Color.white);
       flightDistancePremiumMsg = new JLabel();
       
       SeatChoicePremiumMsg = new JLabel();
-      SeatChoicePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      SeatChoicePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       SeatChoicePremiumMsg.setForeground (Color.white);
       SeatChoicePremiumMsg = new JLabel();
       
       // ie the expense of a round trip flight if this was selected
       multiWayFlightPremiumMsg = new JLabel();
-      multiWayFlightPremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      multiWayFlightPremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       multiWayFlightPremiumMsg.setForeground (Color.white);
       multiWayFlightPremiumMsg = new JLabel();
       
       divider2Msg = new JLabel();
-      divider2Msg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      divider2Msg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       divider2Msg.setForeground (Color.white);
       divider2Msg = new JLabel("__________________________________________________");
       
       finalPriceWithoutTaxMsg = new JLabel();
-      finalPriceWithoutTaxMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      finalPriceWithoutTaxMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       finalPriceWithoutTaxMsg.setForeground (Color.white);
-      finalPriceWithoutTaxMsg = new JLabel("Final ticket price: $" +  finalticketPrice + ".00");
+      finalPriceWithoutTaxMsg = new JLabel("Final ticket price: $" +  finalticketPrice);
       
       
       double taxBill = finalticketPrice*0.09; 
       taxAmountMsg = new JLabel();
-      taxAmountMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      taxAmountMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       taxAmountMsg.setForeground (Color.white);
       taxAmountMsg = new JLabel("Sales tax of your purchase: $" +  taxBill);
       
+      // If we + to a string we only concatenate it instead of acutually doing math like we want so we need to define toalCost first
+      double totalCost = finalticketPrice+taxBill;
       totalAmuontUserOwesMsg = new JLabel();
-      totalAmuontUserOwesMsg.setFont(new Font("SansSerif", Font.PLAIN, 18));
+      totalAmuontUserOwesMsg.setFont(new Font("SansSerif", Font.PLAIN, 30));
       totalAmuontUserOwesMsg.setForeground (Color.white);
-      totalAmuontUserOwesMsg = new JLabel("Total price of transaction: $" +  finalticketPrice+taxBill);
+      totalAmuontUserOwesMsg = new JLabel("Total price of transaction: $" +  totalCost);
       
       
       // We need more information on the start and destination airport
@@ -188,11 +190,18 @@ public class FinalizeTicketInterface extends JFrame{
          
          //Lets handle destination airport extra details
          destinationAirportcode.setText("Airport Code: " + moreInfoOnDestinationAirport[1]);
-         destinationAirportcode.setText("Airport Location: " + moreInfoOnDestinationAirport[2]);
+         destinationAirportLocation.setText("Airport Location: " + moreInfoOnDestinationAirport[2]);
          
+         //Lets handle the ticket premiums
+         // First we need to calculate the premiums
+         double [] Userpremiums;
+         Userpremiums = HelperMethodsForScheduleAFlightInterface.CalculateTicketPrimiums((int)originalticketPrice, usersStartAirport, 
+                     usersDestinationAirport, UsersSeatChoice,UsersMultipleFlightChoice);
+ 
+         flightDistancePremiumMsg.setText("Flight Distance Premium: +$" + Userpremiums[0]);
+         SeatChoicePremiumMsg.setText("Seat Choice Premium: +$" + Userpremiums[1]);
          
-         
-         
+         multiWayFlightPremiumMsg.setText(UsersMultipleFlightChoice + " Premium: +$" + Userpremiums[2]);
          
          
          
@@ -216,19 +225,36 @@ public class FinalizeTicketInterface extends JFrame{
       
       // Set the location for objects on the interface (denoted as X-axis,Y-axis,x-width,y-width)
       // location 0,0 represents the top left corner of the panel
-               TicketInfoOnUser.setBounds(1, 0, 400, 20);
-            startAirportNameMsg.setBounds(1, 20, 600, 50);
-               startAirportcode.setBounds(36, 40, 600, 50);
-           startAirportLocation.setBounds(36, 60, 600, 50);
+               TicketInfoOnUser.setBounds(2, 0, 400, 20);
+            startAirportNameMsg.setBounds(2, 30, 600, 50);
+               startAirportcode.setBounds(36, 60, 600, 50);
+           startAirportLocation.setBounds(36, 90, 600, 50);
      
-      destinationAirportNameMsg.setBounds(1, 100, 600, 50);
-         destinationAirportcode.setBounds(36, 120, 600, 50);
-     destinationAirportLocation.setBounds(36, 140, 600, 50);
+       destinationAirportNameMsg.setBounds(2, 140, 600, 50);
+         destinationAirportcode.setBounds(36, 170, 600, 50);
+     destinationAirportLocation.setBounds(36, 200, 600, 50);
     
-              userSeatChoiceMsg.setBounds(1, 180, 600, 50);
-      
+               userSeatChoiceMsg.setBounds(2, 250, 600, 50);
+                   ticketTypeMsg.setBounds(2, 280, 600, 50);
+                      dividerMsg.setBounds(2, 310, 600, 50);
+                   
+                   paymentInfoMsg.setBounds(2, 330, 600, 50);
+            InitialflightPriceMsg.setBounds(2, 360, 600, 50);
+         flightDistancePremiumMsg.setBounds(2, 390, 600, 50);
+             SeatChoicePremiumMsg.setBounds(2, 420, 600, 50);
+         multiWayFlightPremiumMsg.setBounds(2, 450, 600, 50);
+                      divider2Msg.setBounds(2, 480, 600, 50);
+                      
+                      
+          finalPriceWithoutTaxMsg.setBounds(2, 500, 600, 50);
+                     taxAmountMsg.setBounds(2, 530, 600, 50);
+                     
+           // This message should have emphasis so it will be bigger and farther away from other messages                  
+           totalAmuontUserOwesMsg.setBounds(2, 560, 600, 50);
 
-      submit.setBounds(250, 600, 200, 30);
+
+
+      submit.setBounds(200, 610, 200, 30);
       
       
       
@@ -242,7 +268,20 @@ public class FinalizeTicketInterface extends JFrame{
       panel.add(destinationAirportNameMsg);
       panel.add(destinationAirportcode);
       panel.add(destinationAirportLocation);
+      
       panel.add(userSeatChoiceMsg);
+      panel.add(ticketTypeMsg);
+      panel.add(dividerMsg);
+      panel.add(paymentInfoMsg);
+      
+      panel.add(InitialflightPriceMsg);
+      panel.add(flightDistancePremiumMsg);
+      panel.add(SeatChoicePremiumMsg);
+      panel.add(multiWayFlightPremiumMsg);
+      panel.add(divider2Msg);
+      panel.add(finalPriceWithoutTaxMsg);
+      panel.add(taxAmountMsg);
+      panel.add(totalAmuontUserOwesMsg);
       
       panel.add(submit);
       

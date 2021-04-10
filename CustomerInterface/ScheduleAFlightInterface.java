@@ -264,7 +264,7 @@ public ScheduleAFlightInterface(String userName) {
           PurchasePriceMsg.setBounds(50, 540, 1500, 200);
           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
 
-          finalTicketInvalidMsg.setBounds(900, 630, 1500, 200);
+          finalTicketInvalidMsg.setBounds(840, 630, 1500, 200);
           
           
             //Lets do right side
