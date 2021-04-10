@@ -52,7 +52,7 @@ public class FinalizeTicketInterface extends JFrame{
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
-      setSize(580, 700);
+      setSize(570, 700);
       //Center the frame to middle of screen
       setLocationRelativeTo(null);
       //Disable resize
@@ -254,7 +254,7 @@ public class FinalizeTicketInterface extends JFrame{
 
 
 
-      submit.setBounds(200, 610, 200, 30);
+           submit.setBounds(175, 610, 200, 30);
       
       
       
