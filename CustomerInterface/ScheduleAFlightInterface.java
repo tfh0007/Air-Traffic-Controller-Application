@@ -38,7 +38,6 @@ private String[] seatChoice = { "First Class", "Business Class", "Premium Econom
 private String[] multipleFlightChoice = { "Round trip ticket","One way ticket"};
 
 
-
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgroundLarge.jpg");
 
@@ -46,17 +45,17 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
 
    private JButton logOut, GoBack, PrintOutYourTicket;
    
-   private JLabel initialAirportMsg, FinalAirportMsg, startAirportInvalidMsg, destinationAirportInvalidMsg, SeatPreference, PurchasePriceMsg, PriceSoFarMsg, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,TimeOfFlightMsg, TicketPurchasePriceMsg;
+   private JLabel initialAirportMsg, FinalAirportMsg, startAirportInvalidMsg, destinationAirportInvalidMsg, SeatPreference, 
+                  PurchasePriceMsg, PriceSoFarMsg, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,
+                  TimeOfFlightMsg, TicketPurchasePriceMsg, finalTicketInvalidMsg;
    
    
-   // These represent our hidden text boxes that the user will have to fill in to continue
-   // Note: JPasswordField uses a depreciated API but this should not be a serious concern
-   private JPasswordField creditCardNumber;
+   // This represents the field that will assign a particular date to our flight
+   private JTextField DateOfFlight;
    
-   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight;
+   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight, menuForDateSelection;
 
-
-
+   
 
 public ScheduleAFlightInterface(String userName) {
 
@@ -129,6 +128,8 @@ public ScheduleAFlightInterface(String userName) {
       FinalAirportMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       FinalAirportMsg.setForeground (Color.white);
       
+      
+      
       destinationAirportInvalidMsg = new JLabel();
       destinationAirportInvalidMsg.setFont(new Font("Arial", Font.PLAIN, 20));
       destinationAirportInvalidMsg.setForeground (Color.red);
@@ -144,6 +145,11 @@ public ScheduleAFlightInterface(String userName) {
       PriceSoFarMsg = new JLabel("$223.00   " );
       PriceSoFarMsg.setFont(new Font("Arial", Font.PLAIN, 50));
       PriceSoFarMsg.setForeground (Color.gray);
+      
+      finalTicketInvalidMsg = new JLabel();
+      finalTicketInvalidMsg.setFont(new Font("Arial", Font.PLAIN, 30));
+      finalTicketInvalidMsg.setForeground (Color.red);
+
       
       // Lets make our menues
       //This causes an unsafe warning somehow 
@@ -207,7 +213,8 @@ public ScheduleAFlightInterface(String userName) {
                          
       logOut = new JButton("<-- Log Out");
       GoBack = new JButton("Click here to return to " + userName + "'s dashboard");
-      PrintOutYourTicket = new JButton("Print Your Ticket");
+      PrintOutYourTicket = new JButton("Click here to finalize ticket");
+      
      
       // Make the log out button Opaque
       logOut.setOpaque(false);
@@ -228,7 +235,14 @@ public ScheduleAFlightInterface(String userName) {
            GoBack.addActionListener(
             new GoBackActionListener());
             
-      
+      PrintOutYourTicket.setOpaque(false);
+      PrintOutYourTicket.setContentAreaFilled(true);
+      PrintOutYourTicket.setBorderPainted(true);
+      PrintOutYourTicket.setFont(new Font("SansSerif", Font.PLAIN, 16));
+      PrintOutYourTicket.setForeground (Color.black);
+         
+           PrintOutYourTicket.addActionListener(
+            new PrintOutYourTicketActionListener());
          
            
            
@@ -249,13 +263,16 @@ public ScheduleAFlightInterface(String userName) {
           SeatPreference.setBounds(50, 370, 1500, 200);
           PurchasePriceMsg.setBounds(50, 540, 1500, 200);
           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
+
+          finalTicketInvalidMsg.setBounds(900, 630, 1500, 200);
+          
           
             //Lets do right side
           TicketResultsMsg.setBounds(880, 30, 1500, 200);
           
           //Our buttons
           logOut.setBounds(1, 1, 250, 60);
-          PrintOutYourTicket.setBounds(1100, 600, 200, 60);
+          PrintOutYourTicket.setBounds(950, 600, 350, 60);
           GoBack.setBounds(50, 800, 1500, 80);
           
           //Our menues
@@ -277,6 +294,7 @@ public ScheduleAFlightInterface(String userName) {
             this.add(PriceSoFarMsg);
             this.add(startAirportInvalidMsg);
             this.add(destinationAirportInvalidMsg);
+            this.add(finalTicketInvalidMsg);
 
             
             // Now lets do our menues
@@ -337,6 +355,38 @@ public ScheduleAFlightInterface(String userName) {
 
       }
   }
+  
+   private class PrintOutYourTicketActionListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      
+      
+      System.out.println("DEBUG: Finalize user ticket button pushed");
+      
+      // We do not want to dispose the previous page because this will be a min interface displaying ticket results
+      
+      // We need to check that all fields are filled in before the ticket result interface can work
+      if (TheUser == null || usersStartAirport == null || usersDestinationAirport == null || UsersSeatChoice == null || UsersMultipleFlightChoice == null) {
+      
+         finalTicketInvalidMsg.setText("**One or more of your entries is invalid**");
+         return;
+         }
+      if (usersStartAirport.equals("Select an airport") || usersDestinationAirport.equals("Select an airport") || usersStartAirport.equals(usersDestinationAirport)) {
+      
+         finalTicketInvalidMsg.setText("**One or more of your entries is invalid**");
+         return;
+         }
+      
+      // We made it past the check conditions so get rid of any error message here
+         finalTicketInvalidMsg.setText("                                           ");
+
+      FinalizeTicketInterface frame6;
+      frame6 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
+                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice);
+      
+      }
+   }
+  
   
      private class menuForStartAirportsActionListener implements ActionListener {
         @Override
