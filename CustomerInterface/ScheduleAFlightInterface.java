@@ -46,7 +46,7 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
 
    private JButton logOut, GoBack, PrintOutYourTicket;
    
-   private JLabel initialAirportMsg, FinalAirportMsg, SeatPreference, PurchasePriceMsg, PriceSoFarMsg, InvalidSeatChoice, InvalidSeatNumber, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,TimeOfFlightMsg, TicketPurchasePriceMsg;
+   private JLabel initialAirportMsg, FinalAirportMsg, startAirportInvalidMsg, destinationAirportInvalidMsg, SeatPreference, PurchasePriceMsg, PriceSoFarMsg, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,TimeOfFlightMsg, TicketPurchasePriceMsg;
    
    
    // These represent our hidden text boxes that the user will have to fill in to continue
@@ -74,7 +74,7 @@ public ScheduleAFlightInterface(String userName) {
 
 
       
-      setTitle("Info about " + userName + "  **Customer Layout** ");
+      setTitle("Schedule a flight for " + userName + "  **Customer Layout** ");
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
@@ -121,9 +121,17 @@ public ScheduleAFlightInterface(String userName) {
       initialAirportMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       initialAirportMsg.setForeground (Color.white);
       
+      startAirportInvalidMsg = new JLabel();
+      startAirportInvalidMsg.setFont(new Font("Arial", Font.PLAIN, 20));
+      startAirportInvalidMsg.setForeground (Color.red);
+      
       FinalAirportMsg = new JLabel("Please select your destination airport location" );
       FinalAirportMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       FinalAirportMsg.setForeground (Color.white);
+      
+      destinationAirportInvalidMsg = new JLabel();
+      destinationAirportInvalidMsg.setFont(new Font("Arial", Font.PLAIN, 20));
+      destinationAirportInvalidMsg.setForeground (Color.red);
 
       SeatPreference = new JLabel("Please select your seat preference" );
       SeatPreference.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -233,7 +241,11 @@ public ScheduleAFlightInterface(String userName) {
           
           //Our labels
           initialAirportMsg.setBounds(50, 30, 1500, 200);
+          startAirportInvalidMsg.setBounds(50, 170, 1500, 200);
+          
           FinalAirportMsg.setBounds(50, 200, 1500, 200);
+          destinationAirportInvalidMsg.setBounds(50, 340, 1500, 200);
+          
           SeatPreference.setBounds(50, 370, 1500, 200);
           PurchasePriceMsg.setBounds(50, 540, 1500, 200);
           PriceSoFarMsg.setBounds(50, 625, 1500, 200);
@@ -263,6 +275,9 @@ public ScheduleAFlightInterface(String userName) {
             this.add(SeatPreference);
             this.add(PurchasePriceMsg);
             this.add(PriceSoFarMsg);
+            this.add(startAirportInvalidMsg);
+            this.add(destinationAirportInvalidMsg);
+
             
             // Now lets do our menues
             this.add(menuForStartAirports);
@@ -330,15 +345,36 @@ public ScheduleAFlightInterface(String userName) {
          JComboBox cb = (JComboBox)e.getSource();
          usersStartAirport = (String)cb.getSelectedItem();
          
+         System.out.println("DEBUG: Option: " + usersStartAirport + " was just picked in the menu for start airport");
+         
          // In order to use .equals below neither parameter can be null
-         if (usersStartAirport == null) {
+         if (usersStartAirport == null || usersDestinationAirport == null) {
+         // If one or more entries is null than atleast one airport has not been selected yet
+            startAirportInvalidMsg.setText("**The start and destination airport must be picked**");
             return;
             }
          
          // Since this check is not working in the Helper methods for schedule a flight lets try it here
-         if (usersStartAirport.equals(usersDestinationAirport)) {
+         // Lets check that our airport choice is a valid entry
+         if (usersStartAirport.equals("Select an airport")) {
+            startAirportInvalidMsg.setText("**The start and destination airport must be picked**");
             return;
          }
+         // The user could have changed the destination value to an ivalid option earlier so we need to check for this
+         else if (usersDestinationAirport.equals("Select an airport")) {
+         return;
+         
+         
+         }
+         else if (usersStartAirport.equals(usersDestinationAirport)) {
+            startAirportInvalidMsg.setText("**The start and destination airports can not be the same**");
+
+            return;
+         }
+         
+         // The airport was a valid entry so lets get rid of any error message
+            startAirportInvalidMsg.setText("                                                                    ");
+            destinationAirportInvalidMsg.setText("                                                                    ");
                            // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
          newTicketPrice = 0;
          // Set up the new ticket price based on all of the user's choices thus far
@@ -358,7 +394,6 @@ public ScheduleAFlightInterface(String userName) {
          currentTicketPrice = newTicketPrice;
 
 
-         System.out.println("DEBUG: Option: " + usersStartAirport + " was just picked in the menu for start airport");
 
   
       } 
@@ -375,15 +410,34 @@ public ScheduleAFlightInterface(String userName) {
          JComboBox cb = (JComboBox)e.getSource();
          usersDestinationAirport = (String)cb.getSelectedItem();
          
+         System.out.println("DEBUG: Option: " + usersDestinationAirport + " was just picked in the menu for destination airport");
+         
          // In order to use .equals below neither parameter can be null
-         if (usersDestinationAirport == null) {
+         if (usersStartAirport == null || usersDestinationAirport == null) {
+         // If one or more entries is null than atleast one airport has not been selected yet
+            destinationAirportInvalidMsg.setText("**The start and destination airport must be picked**");
             return;
             }
          // Since this check is not working in the Helper methods for schedule a flight lets try it here
-         if (usersDestinationAirport.equals(usersStartAirport)) {
+         
+         if (usersDestinationAirport.equals("Select an airport")) {
+            destinationAirportInvalidMsg.setText("**The start and destination airport must be picked**");
+            return;
+         }
+         // The user could have changed the start value to an ivalid option earlier so we need to check for this
+         else if (usersStartAirport.equals("Select an airport")) {
+         return;
+         
+         }
+         else if (usersDestinationAirport.equals(usersStartAirport)) {
+            destinationAirportInvalidMsg.setText("**The start and destination airports can not be the same**");
+
             return;
          }
          
+                  // The airport was a valid entry so lets get rid of any error message
+            startAirportInvalidMsg.setText("                                                                    ");
+            destinationAirportInvalidMsg.setText("                                                                    ");
                   // We do not want a newTicketPrice to conflict with our result so reset newTicketPrice
          newTicketPrice = 0;
          // Set up the new ticket price based on all of the user's choices thus far
@@ -402,7 +456,6 @@ public ScheduleAFlightInterface(String userName) {
          // Now we need to update our currentTicketPrice to the new ticket price
          currentTicketPrice = newTicketPrice;
 
-         System.out.println("DEBUG: Option: " + usersDestinationAirport + " was just picked in the menu for destination airport");
 
   
       } 

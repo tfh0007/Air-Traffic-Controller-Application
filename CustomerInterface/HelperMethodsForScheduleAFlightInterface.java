@@ -15,6 +15,7 @@ public class HelperMethodsForScheduleAFlightInterface {
             // These will show the cent values on the screen
                int centD = 0;
                int centS = 0;
+                    
 
          if (oldTicketPrice < newTicketPrice) {
          
@@ -166,7 +167,7 @@ public class HelperMethodsForScheduleAFlightInterface {
       }
       
 // Lets handle Airport choice
-      if (!usersStartAirport.equals(usersDestinationAirport) || !usersDestinationAirport.equals(usersStartAirport)) {
+      if (!usersStartAirport.equals(usersDestinationAirport)) {
          //Since there airports are not the same we can continue
          
          
