@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.io.IOException;
 
+import java.util.Date;      
+
 //External Sources:
 //Used https://www.tutorialspoint.com/how-to-add-background-image-to-jframe-in-java to figure out how to have a background image
 
@@ -25,7 +27,10 @@ public static String TheUser;
 // TicketPrice is the current price of the customers ticket. The ticket price will start at the lowest value possible
 // currentTicketPrice is the price of the ticket with our current selections
 private int startAirportCount = 0, originalTicketPrice=223, currentTicketPrice=223, newTicketPrice;
-private String usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice;
+private String usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice;
+
+// We need to gather the current date
+private Date currentDate = new Date(); 
 
    // A list of all of our airports that can be used as arrival and destination locations
    // This array is causing an unsafe warning
@@ -37,7 +42,22 @@ private String[] seatChoice = { "First Class", "Business Class", "Premium Econom
    // A list of all of our multiple flight choices
 private String[] multipleFlightChoice = { "Round trip ticket","One way ticket"};
 
-
+private String[] flightTimeChoice = {"12:00 a.m", "12:15 a.m", "12:30 a.m","12:45 a.m","1:00 a.m", "1:15 a.m",
+                                     "1:30 a.m","1:45 a.m","2:00 a.m", "2:15 a.m", "2:30 a.m","2:45 a.m","3:00 a.m",
+                                     "3:15 a.m", "3:30 a.m","3:45 a.m","4:00 a.m", "4:15 a.m", "4:30 a.m","4:45 a.m",
+                                     "5:00 a.m", "5:15 a.m", "5:30 a.m","5:45 a.m","6:00 a.m", "6:15 a.m", "6:30 a.m",
+                                     "6:45 a.m","7:00 a.m", "7:15 a.m", "7:30 a.m","7:45 a.m","8:00 a.m", "8:15 a.m",
+                                     "8:30 a.m","8:45 a.m","9:00 a.m", "9:15 a.m", "9:30 a.m","9:45 a.m","10:00 a.m",
+                                     "10:15 a.m", "10:30 a.m","10:45 a.m","11:00 a.m", "11:15 a.m", "11:30 a.m","11:45 a.m",
+                                     
+                                     "12:00 p.m", "12:15 p.m", "12:30 p.m","12:45 p.m","1:00 p.m", "1:15 p.m",
+                                     "1:30 p.m","1:45 p.m","2:00 p.m", "2:15 p.m", "2:30 p.m","2:45 p.m","3:00 p.m",
+                                     "3:15 p.m", "3:30 p.m","3:45 p.m","4:00 p.m", "4:15 p.m", "4:30 p.m","4:45 p.m",
+                                     "5:00 p.m", "5:15 p.m", "5:30 p.m","5:45 p.m","6:00 p.m", "6:15 p.m", "6:30 p.m",
+                                     "6:45 p.m","7:00 p.m", "7:15 p.m", "7:30 p.m","7:45 p.m","8:00 p.m", "8:15 p.m",
+                                     "8:30 p.m","8:45 p.m","9:00 p.m", "9:15 p.m", "9:30 p.m","9:45 p.m","10:00 p.m",
+                                     "10:15 p.m", "10:30 p.m","10:45 p.m","11:00 p.m", "11:15 p.m", "11:30 p.m","11:45 p.m"};
+                                     
 // Grab a background image
 Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgroundLarge.jpg");
 
@@ -47,13 +67,13 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/simpleBrownBackgro
    
    private JLabel initialAirportMsg, FinalAirportMsg, startAirportInvalidMsg, destinationAirportInvalidMsg, SeatPreference, 
                   PurchasePriceMsg, PriceSoFarMsg, TicketResultsMsg, TicketNumberMsg, TicketStartingLocation, TicketEndingLocationMsg,
-                  TimeOfFlightMsg, TicketPurchasePriceMsg, finalTicketInvalidMsg;
+                  TimeOfFlightMsg, TicketPurchasePriceMsg, timeSelectionMsg, finalTicketInvalidMsg;
    
    
    // This represents the field that will assign a particular date to our flight
    private JTextField DateOfFlight;
    
-   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight, menuForDateSelection;
+   private JComboBox menuForStartAirports, menuForDestinationAirports, menuForSeatChoice, menuForMultipleFlight, menuForDateSelection, menuForFlightTime;
 
    
 
@@ -69,6 +89,8 @@ public ScheduleAFlightInterface(String userName) {
    UsersSeatChoice = "Economy Class";
 // by default UsersMultipleFlightChoice will One way ticket
    UsersMultipleFlightChoice = "One way ticket";
+// by default UsersFlightTimeChoice will be 12:00 p.m
+   UsersFlightTimeChoice = "12:00 p.m";
    
 
 
@@ -142,7 +164,7 @@ public ScheduleAFlightInterface(String userName) {
       PurchasePriceMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       PurchasePriceMsg.setForeground (Color.white);
       
-      PriceSoFarMsg = new JLabel("$223.00   " );
+      PriceSoFarMsg = new JLabel("$ " + originalTicketPrice);
       PriceSoFarMsg.setFont(new Font("Arial", Font.PLAIN, 50));
       PriceSoFarMsg.setForeground (Color.gray);
       
@@ -197,6 +219,15 @@ public ScheduleAFlightInterface(String userName) {
 
       menuForMultipleFlight.addActionListener(
          new menuForMultipleFlightActionListener());
+ 
+            menuForFlightTime = new JComboBox(flightTimeChoice);
+      menuForFlightTime.setSelectedIndex(48);
+      menuForFlightTime.setFont(new Font("Arial", Font.PLAIN, 30));
+
+      menuForFlightTime.addActionListener(
+         new menuForFlightTimeActionListener());
+ 
+         
 
             
 
@@ -205,6 +236,11 @@ public ScheduleAFlightInterface(String userName) {
       TicketResultsMsg = new JLabel("Please tell us if you want a round trip ticket" );
       TicketResultsMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       TicketResultsMsg.setForeground (Color.white);
+      
+      timeSelectionMsg = new JLabel("Please select a time for your flight" );
+      timeSelectionMsg.setFont(new Font("Arial", Font.PLAIN, 30));
+      timeSelectionMsg.setForeground (Color.white);
+
 
       
       
@@ -269,17 +305,19 @@ public ScheduleAFlightInterface(String userName) {
           
             //Lets do right side
           TicketResultsMsg.setBounds(880, 30, 1500, 200);
+          timeSelectionMsg.setBounds(880, 200, 1500, 200);
           
           //Our buttons
           logOut.setBounds(1, 1, 250, 60);
-          PrintOutYourTicket.setBounds(950, 600, 350, 60);
+          PrintOutYourTicket.setBounds(950, 625, 350, 60);
           GoBack.setBounds(50, 800, 1500, 80);
           
           //Our menues
           menuForStartAirports.setBounds(50, 190, 600, 50);
-          menuForDestinationAirports.setBounds(50, 360, 600, 50);
-          menuForSeatChoice.setBounds(50, 530, 600, 50);
-          menuForMultipleFlight.setBounds(880, 190, 600, 50);
+    menuForDestinationAirports.setBounds(50, 360, 600, 50);
+             menuForSeatChoice.setBounds(50, 530, 600, 50);
+         menuForMultipleFlight.setBounds(880, 190, 600, 50);
+             menuForFlightTime.setBounds(880, 360, 600, 50);
 
           //Our text fields
           
@@ -302,7 +340,8 @@ public ScheduleAFlightInterface(String userName) {
             this.add(menuForDestinationAirports);
             this.add(menuForSeatChoice);
             this.add(menuForMultipleFlight);
-
+            this.add(timeSelectionMsg);
+            this.add(menuForFlightTime);
             
             //Now lets do right side
             this.add(TicketResultsMsg);
@@ -366,7 +405,7 @@ public ScheduleAFlightInterface(String userName) {
       // We do not want to dispose the previous page because this will be a min interface displaying ticket results
       
       // We need to check that all fields are filled in before the ticket result interface can work
-      if (TheUser == null || usersStartAirport == null || usersDestinationAirport == null || UsersSeatChoice == null || UsersMultipleFlightChoice == null) {
+      if (TheUser == null || usersStartAirport == null || usersDestinationAirport == null || UsersSeatChoice == null || UsersMultipleFlightChoice == null || UsersFlightTimeChoice == null) {
       
          finalTicketInvalidMsg.setText("**One or more of your entries is invalid**");
          return;
@@ -382,7 +421,7 @@ public ScheduleAFlightInterface(String userName) {
 
       FinalizeTicketInterface frame6;
       frame6 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
-                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice);
+                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice);
       
       }
    }
@@ -573,6 +612,18 @@ public ScheduleAFlightInterface(String userName) {
 
             System.out.println("DEBUG: Option: " + UsersMultipleFlightChoice + " was just picked in the menu for multiple flights");
  
+         }
+      }
+ 
+        public class menuForFlightTimeActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+         JComboBox cb = (JComboBox)e.getSource();
+         UsersFlightTimeChoice = (String)cb.getSelectedItem();
+      
+         System.out.println("DEBUG: Option: " + UsersFlightTimeChoice + " was just picked in the menu for flight time");
+         
          }
       }
       
