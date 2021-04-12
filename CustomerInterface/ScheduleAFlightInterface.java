@@ -164,7 +164,7 @@ public ScheduleAFlightInterface(String userName) {
       PurchasePriceMsg.setFont(new Font("Arial", Font.PLAIN, 30));
       PurchasePriceMsg.setForeground (Color.white);
       
-      PriceSoFarMsg = new JLabel("$ " + originalTicketPrice);
+      PriceSoFarMsg = new JLabel("$ " + originalTicketPrice + ".00");
       PriceSoFarMsg.setFont(new Font("Arial", Font.PLAIN, 50));
       PriceSoFarMsg.setForeground (Color.gray);
       

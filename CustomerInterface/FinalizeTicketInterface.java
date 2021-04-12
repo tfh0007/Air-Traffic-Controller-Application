@@ -313,6 +313,12 @@ public class FinalizeTicketInterface extends JFrame{
       String userName ="";
       String password ="";
       boolean isValidCustomer = false;
+      
+   //set display frame size (x-axis, y-axis)
+   //CHANGE DISPLAY SIZE TO INFORM USER AT THE BOTTOM THAT THEIR TICKET WAS CREATED
+   //DO THIS WITH A JLABEL UNDERNEATH THE CONFIRM SALE BUTTON
+      setSize(570, 770);
+
 
       System.out.println("DEBUG: Confirm Sale button was pressed");
       
