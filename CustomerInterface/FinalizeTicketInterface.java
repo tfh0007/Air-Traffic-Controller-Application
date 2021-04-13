@@ -25,7 +25,7 @@ public class FinalizeTicketInterface extends JFrame{
    
    private JLabel TicketInfoOnUser, startAirportMsg, startAirportNameMsg, startAirportcode, startAirportLocation, destinationAirportNameMsg, destinationAirportcode, 
                   destinationAirportLocation, userSeatChoiceMsg, UserRoundorSingletripMsg, ticketTypeMsg, flightTimeMsg, dividerMsg, paymentInfoMsg, InitialflightPriceMsg,
-                  flightDistancePremiumMsg,SeatChoicePremiumMsg,multiWayFlightPremiumMsg,divider2Msg,finalPriceWithoutTaxMsg,taxAmountMsg,totalAmuontUserOwesMsg;
+                  flightDistancePremiumMsg,SeatChoicePremiumMsg,multiWayFlightPremiumMsg,divider2Msg,finalPriceWithoutTaxMsg,taxAmountMsg,totalAmuontUserOwesMsg,ticketConfirmedMsg;
    
    private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice, completeUserFlightDate; 
    
@@ -76,113 +76,96 @@ public class FinalizeTicketInterface extends JFrame{
       
       TicketInfoOnUser = new JLabel();
       TicketInfoOnUser.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      TicketInfoOnUser.setForeground (Color.white);
       TicketInfoOnUser = new JLabel("Ticket for customer: " + TheUser);
       
       
       startAirportNameMsg = new JLabel();
       startAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportNameMsg.setForeground (Color.white);
       startAirportNameMsg = new JLabel("Start Airport: " + usersStartAirport);
       
       startAirportcode = new JLabel();
       startAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportcode.setForeground (Color.white);
       startAirportcode = new JLabel();
       
       startAirportLocation = new JLabel();
       startAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportLocation.setForeground (Color.white);
       startAirportLocation = new JLabel();
 
       
       destinationAirportNameMsg = new JLabel();
       destinationAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      destinationAirportNameMsg.setForeground (Color.white);
       destinationAirportNameMsg = new JLabel("Destination Airport: " + usersDestinationAirport);
       
       destinationAirportcode = new JLabel();
       destinationAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      destinationAirportcode.setForeground (Color.white);
       destinationAirportcode = new JLabel();
       
       destinationAirportLocation = new JLabel();
       destinationAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      destinationAirportLocation.setForeground (Color.white);
       destinationAirportLocation = new JLabel();
  
       userSeatChoiceMsg = new JLabel();
       userSeatChoiceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      userSeatChoiceMsg.setForeground (Color.white);
       userSeatChoiceMsg = new JLabel("Seat choice for flight: " + UsersSeatChoice);
       
       ticketTypeMsg = new JLabel();
       ticketTypeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      ticketTypeMsg.setForeground (Color.white);
       ticketTypeMsg = new JLabel("This ticket is a: "  + UsersMultipleFlightChoice);
       
       flightTimeMsg = new JLabel();
       flightTimeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      flightTimeMsg.setForeground (Color.white);
       flightTimeMsg = new JLabel("Your flight is scheduled for: "  + completeUserFlightDate + " at " + UsersFlightTimeChoice);
       
       
       
       dividerMsg = new JLabel();
       dividerMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      dividerMsg.setForeground (Color.white);
       dividerMsg = new JLabel("__________________________________________________");
    
       paymentInfoMsg = new JLabel();
       paymentInfoMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      paymentInfoMsg.setForeground (Color.white);
       paymentInfoMsg = new JLabel("Transaction details for this flight");
       
       InitialflightPriceMsg = new JLabel();
       InitialflightPriceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      InitialflightPriceMsg.setForeground (Color.white);
       InitialflightPriceMsg = new JLabel("Base price of a ticket: $ " + originalticketPrice);
       
       flightDistancePremiumMsg = new JLabel();
       flightDistancePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      flightDistancePremiumMsg.setForeground (Color.white);
       flightDistancePremiumMsg = new JLabel();
       
       SeatChoicePremiumMsg = new JLabel();
       SeatChoicePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      SeatChoicePremiumMsg.setForeground (Color.white);
       SeatChoicePremiumMsg = new JLabel();
       
       // ie the expense of a round trip flight if this was selected
       multiWayFlightPremiumMsg = new JLabel();
       multiWayFlightPremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      multiWayFlightPremiumMsg.setForeground (Color.white);
       multiWayFlightPremiumMsg = new JLabel();
       
       divider2Msg = new JLabel();
       divider2Msg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      divider2Msg.setForeground (Color.white);
       divider2Msg = new JLabel("__________________________________________________");
       
       finalPriceWithoutTaxMsg = new JLabel();
       finalPriceWithoutTaxMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      finalPriceWithoutTaxMsg.setForeground (Color.white);
       finalPriceWithoutTaxMsg = new JLabel("Final ticket price: $" +  finalticketPrice);
       
       
       double taxBill = finalticketPrice*0.09; 
       taxAmountMsg = new JLabel();
       taxAmountMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      taxAmountMsg.setForeground (Color.white);
       taxAmountMsg = new JLabel("Sales tax of your purchase: $" +  taxBill);
       
       // If we + to a string we only concatenate it instead of acutually doing math like we want so we need to define toalCost first
       double totalCost = finalticketPrice+taxBill;
-      totalAmuontUserOwesMsg = new JLabel();
-      totalAmuontUserOwesMsg.setFont(new Font("SansSerif", Font.PLAIN, 30));
-      totalAmuontUserOwesMsg.setForeground (Color.white);
-      totalAmuontUserOwesMsg = new JLabel("Total price of transaction: $" +  totalCost);
       
+      totalAmuontUserOwesMsg = new JLabel("Total price of transaction: $" +  totalCost);
+      totalAmuontUserOwesMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
+
+      ticketConfirmedMsg = new JLabel();
+      ticketConfirmedMsg.setFont(new Font("SansSerif", Font.PLAIN, 26));
+      ticketConfirmedMsg.setForeground (Color.green);
       
       // We need more information on the start and destination airport
       try {
@@ -266,6 +249,7 @@ public class FinalizeTicketInterface extends JFrame{
 
 
            submit.setBounds(175, 640, 200, 30);
+           ticketConfirmedMsg.setBounds(2,680,1000,50);
       
       
       
@@ -297,6 +281,7 @@ public class FinalizeTicketInterface extends JFrame{
       panel.add(totalAmuontUserOwesMsg);
       
       panel.add(submit);
+      panel.add(ticketConfirmedMsg);
       
    
    }
@@ -310,6 +295,9 @@ public class FinalizeTicketInterface extends JFrame{
       @Override
       public void actionPerformed(ActionEvent e) {
       
+      
+      // We want to hide the button so the user can not keep trying to create the exact same ticket over and over                                  
+      submit.setBounds(5000, 640, 200, 30);
       String userName ="";
       String password ="";
       boolean isValidCustomer = false;
@@ -317,8 +305,35 @@ public class FinalizeTicketInterface extends JFrame{
    //set display frame size (x-axis, y-axis)
    //CHANGE DISPLAY SIZE TO INFORM USER AT THE BOTTOM THAT THEIR TICKET WAS CREATED
    //DO THIS WITH A JLABEL UNDERNEATH THE CONFIRM SALE BUTTON
-      setSize(570, 770);
-
+      setSize(770, 770);
+      // This will let us know if a ticket was properly added or not
+      boolean isTicketAdded = false;
+      
+      
+      try {
+         isTicketAdded = TicketInformationScanner.addNewTicket(TheUser,usersStartAirport,usersDestinationAirport,
+                                          UsersSeatChoice,UsersMultipleFlightChoice,originalticketPrice,
+                                          finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate);
+         
+         // Inform the user that the ticket was added to the database when it is                                
+         if (isTicketAdded = true) {
+         
+            ticketConfirmedMsg.setText("Congratulations your new ticket has been confirmed");
+         } 
+         
+         // Inform the user that the ticket was not added to the ticket database
+         else {
+         
+            ticketConfirmedMsg.setForeground (Color.red);
+            ticketConfirmedMsg.setText("Oh no, your new ticket could not be confirmed :(");
+         }                                       
+                                    
+                                          
+      }                  
+      catch (FileNotFoundException f) {
+      System.out.println("An error occured while trying to write to tickets.txt");
+      
+      }
 
       System.out.println("DEBUG: Confirm Sale button was pressed");
       
