@@ -106,19 +106,9 @@ createView(userName);
       UserHasNoTicketsMsg2.setForeground (Color.red);
       
       
-      // Display different things depending on if the user has any tickets to look through
-      if (ticketAvaliable) {
-      
-      AboutYourTickets.setText("Here is all of the information that pertains to your previously created tickets" );
-      }
-      
-      else {
-      
-      UserHasNoTicketsMsg.setText("It appears that " + TheUser + " has not created any tickets for a flight");
-      UserHasNoTicketsMsg2.setText("**To create a new ticket go back to " + TheUser + "'s dashboard and click Schedule a new flight**"); 
+
       
       
-      }
       
       TicketNumberMsg = new JLabel();
       TicketNumberMsg.setFont(new Font("SansSerif", Font.PLAIN, 25));
@@ -142,6 +132,41 @@ createView(userName);
       
       //READ TICKET DATA BASE AND LOOK FOR THE FIRST TICKET THAT BELONGS TO THIS USER
       // THEN UPDATE THE JLABELS TO INCLUDE THIS INFORMATION
+      
+      
+      
+      try {
+         String[] infoOnUserTicket;
+         infoOnUserTicket = TicketInformationScanner.ReturnInfoForTicket(ticketNumber, TheUser);
+         
+         // If the info on our ticket is not null then a valid ticket was found so this ticket is avaliable and we can gather the result
+         if (infoOnUserTicket != null) {
+         
+            ticketAvaliable = true;
+            TicketNumberMsg.setText("Info about " + TheUser + "'s ticket " + ticketNumber);
+            AirportStartMsg.setText ("The start airport is " + infoOnUserTicket[2]);
+            DestinationStartMsg.setText( "The destination airport is " + infoOnUserTicket[3]);
+            FinalTicketPrice.setText( "The price of this ticket without tax was: $" + infoOnUserTicket[7]);
+         }
+         
+         
+      if (ticketAvaliable == false) {
+      
+      
+      UserHasNoTicketsMsg.setText("It appears that " + TheUser + " has not created any tickets for a flight");
+      UserHasNoTicketsMsg2.setText("**To create a new ticket go back to " + TheUser + "'s dashboard and click Schedule a new flight**"); 
+      
+      }
+      
+      
+      
+      }
+      catch (FileNotFoundException f) {
+         System.out.println("An error occured while trying to read the tickets database");
+      }
+
+      
+
 
                          
       logOut = new JButton("<-- Log Out");
@@ -215,14 +240,14 @@ createView(userName);
           
           //HIDE THIS UNLESS THE USER HAS A CURRENT TICKET TO LOOK AT
           
-          if (ticketAvaliable) {
+          if (ticketAvaliable == true) {
            ViewReceiptForTicket.setBounds(300, 750, 340, 60);
            
            }
            
           //HIDE THIS UNLESS THE USER HAS A NEXT TICKET TO LOOK AT
           
-          if (nextTicketAvaliable) {
+          if (nextTicketAvaliable == true) {
            ViewNextTicket.setBounds(670, 750, 340, 60);
            
            }
