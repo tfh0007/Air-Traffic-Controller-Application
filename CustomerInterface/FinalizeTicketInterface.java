@@ -73,89 +73,68 @@ public class FinalizeTicketInterface extends JFrame{
       getContentPane().add(panel);
       panel.setBackground(Color.WHITE);
       panel.setLayout(null);
-      
-      TicketInfoOnUser = new JLabel();
-      TicketInfoOnUser.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      TicketInfoOnUser = new JLabel("Ticket for customer: " + TheUser);
-      
-      
-      startAirportNameMsg = new JLabel();
-      startAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportNameMsg = new JLabel("Start Airport: " + usersStartAirport);
-      
-      startAirportcode = new JLabel();
-      startAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportcode = new JLabel();
-      
-      startAirportLocation = new JLabel();
-      startAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      startAirportLocation = new JLabel();
 
+      TicketInfoOnUser = new JLabel("Ticket for customer: " + TheUser);
+      TicketInfoOnUser.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      destinationAirportNameMsg = new JLabel();
-      destinationAirportNameMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
+      startAirportNameMsg = new JLabel("Start Airport: " + usersStartAirport);
+      startAirportNameMsg.setFont(new Font("Arial", Font.PLAIN, 12));
+      
+      startAirportcode = new JLabel();
+      startAirportcode.setFont(new Font("Arial", Font.PLAIN, 12));
+      
+      startAirportLocation = new JLabel();
+      startAirportLocation.setFont(new Font("Arial", Font.PLAIN, 12));
+
       destinationAirportNameMsg = new JLabel("Destination Airport: " + usersDestinationAirport);
+      destinationAirportNameMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       destinationAirportcode = new JLabel();
-      destinationAirportcode.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      destinationAirportcode = new JLabel();
+      destinationAirportcode.setFont(new Font("Arial", Font.PLAIN, 12));
       
       destinationAirportLocation = new JLabel();
-      destinationAirportLocation.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      destinationAirportLocation = new JLabel();
+      destinationAirportLocation.setFont(new Font("Arial", Font.PLAIN, 12));
  
-      userSeatChoiceMsg = new JLabel();
-      userSeatChoiceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       userSeatChoiceMsg = new JLabel("Seat choice for flight: " + UsersSeatChoice);
+      userSeatChoiceMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      ticketTypeMsg = new JLabel();
-      ticketTypeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       ticketTypeMsg = new JLabel("This ticket is a: "  + UsersMultipleFlightChoice);
+      ticketTypeMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      flightTimeMsg = new JLabel();
-      flightTimeMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       flightTimeMsg = new JLabel("Your flight is scheduled for: "  + completeUserFlightDate + " at " + UsersFlightTimeChoice);
+      flightTimeMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       
       
-      dividerMsg = new JLabel();
-      dividerMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       dividerMsg = new JLabel("__________________________________________________");
+      dividerMsg.setFont(new Font("Arial", Font.PLAIN, 12));
    
-      paymentInfoMsg = new JLabel();
-      paymentInfoMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       paymentInfoMsg = new JLabel("Transaction details for this flight");
+      paymentInfoMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      InitialflightPriceMsg = new JLabel();
-      InitialflightPriceMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       InitialflightPriceMsg = new JLabel("Base price of a ticket: $ " + originalticketPrice);
+      InitialflightPriceMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       flightDistancePremiumMsg = new JLabel();
-      flightDistancePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      flightDistancePremiumMsg = new JLabel();
+      flightDistancePremiumMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       SeatChoicePremiumMsg = new JLabel();
-      SeatChoicePremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      SeatChoicePremiumMsg = new JLabel();
+      SeatChoicePremiumMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       // ie the expense of a round trip flight if this was selected
       multiWayFlightPremiumMsg = new JLabel();
-      multiWayFlightPremiumMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
-      multiWayFlightPremiumMsg = new JLabel();
+      multiWayFlightPremiumMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      divider2Msg = new JLabel();
-      divider2Msg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       divider2Msg = new JLabel("__________________________________________________");
+      divider2Msg.setFont(new Font("Arial", Font.PLAIN, 12));
       
-      finalPriceWithoutTaxMsg = new JLabel();
-      finalPriceWithoutTaxMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       finalPriceWithoutTaxMsg = new JLabel("Final ticket price: $" +  finalticketPrice);
+      finalPriceWithoutTaxMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       
       double taxBill = finalticketPrice*0.09; 
-      taxAmountMsg = new JLabel();
-      taxAmountMsg.setFont(new Font("SansSerif", Font.PLAIN, 22));
       taxAmountMsg = new JLabel("Sales tax of your purchase: $" +  taxBill);
+      taxAmountMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
       // If we + to a string we only concatenate it instead of acutually doing math like we want so we need to define toalCost first
       double totalCost = finalticketPrice+taxBill;
