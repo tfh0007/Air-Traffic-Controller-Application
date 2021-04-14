@@ -32,7 +32,8 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/DataBackground.jpg
 
    private JButton logOut, GoBack, ShowNextTicket, ViewReceiptForTicket, ViewNextTicket;
    
-   private JLabel AboutYourTickets, UserHasNoTicketsMsg, UserHasNoTicketsMsg2, TicketNumberMsg, AirportStartMsg, DestinationStartMsg, FinalTicketPrice, noNextTicketMsg;
+   private JLabel AboutYourTickets, UserHasNoTicketsMsg, UserHasNoTicketsMsg2, TicketNumberMsg, AirportStartMsg, DestinationStartMsg, TravelDate,
+                  FinalTicketPrice, noNextTicketMsg;
    
    private String[] infoOnUserTicket = {null,null,null,null,null,null,null,null,null};
    
@@ -118,19 +119,24 @@ createView(userName);
       
       
       TicketNumberMsg = new JLabel();
-      TicketNumberMsg.setFont(new Font("SansSerif", Font.PLAIN, 25));
+      TicketNumberMsg.setFont(new Font("SansSerif", Font.PLAIN, 30));
       TicketNumberMsg.setForeground (Color.white);
       
       AirportStartMsg = new JLabel();
-      AirportStartMsg.setFont(new Font("SansSerif", Font.PLAIN, 25));
+      AirportStartMsg.setFont(new Font("SansSerif", Font.PLAIN, 30));
       AirportStartMsg.setForeground (Color.white);
 
       DestinationStartMsg = new JLabel();
-      DestinationStartMsg.setFont(new Font("SansSerif", Font.PLAIN, 25));
+      DestinationStartMsg.setFont(new Font("SansSerif", Font.PLAIN, 30));
       DestinationStartMsg.setForeground (Color.white);
       
+      TravelDate = new JLabel();
+      TravelDate.setFont(new Font("SansSerif", Font.PLAIN, 30));
+      TravelDate.setForeground (Color.white);
+      
+      
       FinalTicketPrice = new JLabel();
-      FinalTicketPrice.setFont(new Font("SansSerif", Font.PLAIN, 25));
+      FinalTicketPrice.setFont(new Font("SansSerif", Font.PLAIN, 30));
       FinalTicketPrice.setForeground (Color.white);
       
       noNextTicketMsg = new JLabel();
@@ -151,6 +157,7 @@ createView(userName);
             TicketNumberMsg.setText("Info about " + TheUser + "'s ticket " + ticketNumber);
             AirportStartMsg.setText ("The start airport is " + infoOnUserTicket[2]);
             DestinationStartMsg.setText( "The destination airport is " + infoOnUserTicket[3]);
+            TravelDate.setText( " The scheduled date and time for this ticket is " + infoOnUserTicket[9] + " at " +  infoOnUserTicket[8]);
             FinalTicketPrice.setText( "The price of this ticket without tax was: $" + infoOnUserTicket[7]);
             
             
@@ -255,26 +262,27 @@ createView(userName);
           logOut.setBounds(1, 1, 250, 60);
           
           
-              TicketNumberMsg.setBounds(50, 150, 1500, 80);
-              AirportStartMsg.setBounds(50, 250, 1500, 80);
-          DestinationStartMsg.setBounds(50, 350, 1500, 80);
-             FinalTicketPrice.setBounds(50, 450, 1500, 80);
-          
+              TicketNumberMsg.setBounds(50, 100, 1500, 80);
+              AirportStartMsg.setBounds(50, 200, 1500, 80);
+          DestinationStartMsg.setBounds(50, 300, 1500, 80);
+                   TravelDate.setBounds(50, 400, 1500, 80);
+             FinalTicketPrice.setBounds(50, 500, 1500, 80);
           //HIDE THIS UNLESS THE USER HAS A CURRENT TICKET TO LOOK AT
           
           if (ticketAvaliable == true) {
-           ViewReceiptForTicket.setBounds(300, 750, 340, 60);
+           ViewReceiptForTicket.setBounds(100, 625, 340, 60);
            
            }
            
           //HIDE THIS UNLESS THE USER HAS A NEXT TICKET TO LOOK AT
           
           if (nextTicketAvaliable == true) {
-           ViewNextTicket.setBounds(670, 750, 340, 60);
+          
+           ViewNextTicket.setBounds(470, 625, 340, 60);
            
            }
            
-           noNextTicketMsg.setBounds(670, 750, 800, 60);
+           noNextTicketMsg.setBounds(470, 625, 800, 60);
            
            
           GoBack.setBounds(50, 800, 1500, 80);
@@ -292,6 +300,7 @@ createView(userName);
             this.add(AirportStartMsg);
             this.add(DestinationStartMsg);
             this.add(FinalTicketPrice);
+            this.add(TravelDate);
             this.add(ViewReceiptForTicket);
             this.add(ViewNextTicket);
             this.add(noNextTicketMsg);
@@ -376,6 +385,7 @@ createView(userName);
       TicketNumberMsg.setText("                                                                                        ");
       AirportStartMsg.setText ("                                                                                    ");
       DestinationStartMsg.setText( "                                                                                    ");
+            TravelDate.setText( "                                                                                        ");
       FinalTicketPrice.setText( "                                                                                          ");
       ticketAvaliable = false;
       nextTicketAvaliable = false;
@@ -394,6 +404,7 @@ createView(userName);
             TicketNumberMsg.setText("Info about " + TheUser + "'s ticket " + ticketNumber);
             AirportStartMsg.setText ("The start airport is " + infoOnUserTicket[2]);
             DestinationStartMsg.setText( "The destination airport is " + infoOnUserTicket[3]);
+            TravelDate.setText( " The scheduled date and time for this ticket is " + infoOnUserTicket[9] + " at " +  infoOnUserTicket[8]);
             FinalTicketPrice.setText( "The price of this ticket without tax was: $" + infoOnUserTicket[7]);
             
             
@@ -432,7 +443,7 @@ createView(userName);
          if (nextTicketAvaliable == false) {
          
             // Make the View New Ticket button invisible because it can't do anything else
-            ViewNextTicket.setBounds(5000, 750, 340, 60);
+            ViewNextTicket.setBounds(5000, 625, 340, 60);
             
             noNextTicketMsg.setText("**No more tickets in your name could be found**"); 
          
