@@ -78,3 +78,23 @@ One way ticket
 1338.0
 6:15 a.m
 10/01/2021
+
+RobertLee
+Hartsfield-Jackson Atlanta International Airport
+Birmingham-Shuttlesworth International Airport
+Premium Economy Class
+Round trip ticket
+223.0
+501.0
+6:00 p.m
+06/17/2021
+
+RobertLee
+Birmingham-Shuttlesworth International Airport
+Leonardo da Vinci-Fiuminco
+Business Class
+One way ticket
+223.0
+1338.0
+7:00 p.m
+06/14/2021
