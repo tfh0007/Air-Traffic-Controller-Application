@@ -34,6 +34,13 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/DataBackground.jpg
    
    private JLabel AboutYourTickets, UserHasNoTicketsMsg, UserHasNoTicketsMsg2, TicketNumberMsg, AirportStartMsg, DestinationStartMsg, FinalTicketPrice, noNextTicketMsg;
    
+   private String[] infoOnUserTicket = {null,null,null,null,null,null,null,null,null};
+   
+   // This has to be declared outside of the try block
+   // We also need to make the size otherwise we will run into errors when the try block that gathers the values fails to find a match
+   private String[] infoOnNextUserTicket = {null,null,null,null,null,null,null,null,null};
+
+   
    // This will signify what number ticket we are currently at
    private int ticketNumber;
    
@@ -131,12 +138,10 @@ createView(userName);
       noNextTicketMsg.setForeground (Color.red);
       
       //READ TICKET DATA BASE AND LOOK FOR THE FIRST TICKET THAT BELONGS TO THIS USER
-      // THEN UPDATE THE JLABELS TO INCLUDE THIS INFORMATION
-      
+      // THEN UPDATE THE JLABELS TO INCLUDE THE INFORMATION
       
       
       try {
-         String[] infoOnUserTicket;
          infoOnUserTicket = TicketInformationScanner.ReturnInfoForTicket(ticketNumber, TheUser);
          
          // If the info on our ticket is not null then a valid ticket was found so this ticket is avaliable and we can gather the result
@@ -147,7 +152,24 @@ createView(userName);
             AirportStartMsg.setText ("The start airport is " + infoOnUserTicket[2]);
             DestinationStartMsg.setText( "The destination airport is " + infoOnUserTicket[3]);
             FinalTicketPrice.setText( "The price of this ticket without tax was: $" + infoOnUserTicket[7]);
-         }
+            
+            
+            
+            // We know the first ticket exists so lets check for a second one
+            // We already have info on first ticket so lets incriment to a new ticket that may or may not exist
+            ticketNumber++;
+            infoOnNextUserTicket = TicketInformationScanner.ReturnInfoForTicket(ticketNumber, TheUser);
+            
+         // If the info on our next ticket is not null then a valid ticket was found so this ticket is avaliable
+         
+            if (infoOnNextUserTicket != null) {
+               nextTicketAvaliable = true;
+               
+            }
+            
+      }
+         
+         
          
          
       if (ticketAvaliable == false) {
@@ -171,7 +193,7 @@ createView(userName);
                          
       logOut = new JButton("<-- Log Out");
       GoBack = new JButton("Click here to return to " + userName + "'s dashboard");
-      ViewReceiptForTicket = new JButton("View the receipt for ticket " + ticketNumber);  
+      ViewReceiptForTicket = new JButton("View the receipt for ticket 1");  
       ViewNextTicket = new JButton("View your next ticket");      
 
       
@@ -233,10 +255,10 @@ createView(userName);
           logOut.setBounds(1, 1, 250, 60);
           
           
-          TicketNumberMsg.setBounds(50, 250, 1500, 80);
-          AirportStartMsg.setBounds(50, 350, 1500, 80);
-          DestinationStartMsg.setBounds(50, 450, 1500, 80);
-          FinalTicketPrice.setBounds(50, 550, 1500, 80);
+              TicketNumberMsg.setBounds(50, 150, 1500, 80);
+              AirportStartMsg.setBounds(50, 250, 1500, 80);
+          DestinationStartMsg.setBounds(50, 350, 1500, 80);
+             FinalTicketPrice.setBounds(50, 450, 1500, 80);
           
           //HIDE THIS UNLESS THE USER HAS A CURRENT TICKET TO LOOK AT
           
@@ -252,7 +274,7 @@ createView(userName);
            
            }
            
-           noNextTicketMsg.setBounds(200, 850, 340, 60);
+           noNextTicketMsg.setBounds(670, 750, 800, 60);
            
            
           GoBack.setBounds(50, 800, 1500, 80);
@@ -307,11 +329,29 @@ createView(userName);
       
       System.out.println("DEBUG: View Receipt for Ticket button pressed");
       
-//WE NEED TO CONSULT THE TICKET DATABASE WITH OUR CURRENT TICKET NUMBER TO RETRIEVE THE NEEDED INFORMATION HERE
-
-      //FinalizeTicketInterface frame7;
-      //frame7 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
-      //               UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice,completeUserFlightDate);
+      // Lets make sure we actually have a ticket to look at
+      
+          if ((ticketAvaliable == true) && (infoOnUserTicket != null)) {
+          
+      String usersStartAirport = infoOnUserTicket[2];
+      String usersDestinationAirport = infoOnUserTicket[3];
+      String UsersSeatChoice = infoOnUserTicket[4];
+      String UsersMultipleFlightChoice = infoOnUserTicket[5];
+      // We have to convert the string values into doubles so we will parse the strings to double values
+      double originalticketPrice = Double.parseDouble(infoOnUserTicket[6]);
+      double finalticketPrice = Double.parseDouble(infoOnUserTicket[7]);
+      
+      String UsersFlightTimeChoice = infoOnUserTicket[8];
+      String completeUserFlightDate = infoOnUserTicket[9];      
+// All we need to do is call the FinalizeTicketInterface with the information we gathered about our ticket
+            FinalizeTicketInterface frame7;
+            
+            // Since we have double values that need to be integers we will have to cast the doubles into integers
+            // The false at the end means this ticket should not be creatable since it already exists
+            frame7 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
+                     UsersMultipleFlightChoice,(int)originalticketPrice,(int)finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate, false);
+                     
+          }
       
       }
    }
@@ -319,6 +359,10 @@ createView(userName);
    private class ViewNextTicketActionListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
+      
+
+      
+      
       
       
          System.out.println("DEBUG: View the next ticket button pressed");
@@ -328,18 +372,72 @@ createView(userName);
 // WE NEED TO USE A FUNCTION WITH A TICKET NUMBER AND USERNAME AS AN INPUT. THE FUNCTION WILL LOOK FOR TICKET NUMBER X BASED ON A LINEAR SCAN OF THE DATABASE
 // IF WE CAN NOT FIND A NEW TICKET THEN HIDE THE VIEW NEXT TICKET BUTTON AND TELL THE USER THAT NO NEW TICKETS ARE AVALIABLE TO LOOK AT
 
-         if (!nextTicketAvaliable) {
+         // Everything we knew about the tickets is gone now since we are pointing somewhere different
+      TicketNumberMsg.setText("                                                                                        ");
+      AirportStartMsg.setText ("                                                                                    ");
+      DestinationStartMsg.setText( "                                                                                    ");
+      FinalTicketPrice.setText( "                                                                                          ");
+      ticketAvaliable = false;
+      nextTicketAvaliable = false;
+      // We are pointing to the next ticket so update the number on the ViewReceiptForTicket button;
+      ViewReceiptForTicket.setText("View the receipt for ticket " + ticketNumber);  
+      
+
+      try {
+         infoOnUserTicket = infoOnNextUserTicket;
+         
+         
+         // If the info on our ticket is not null then a valid ticket was found so this ticket is avaliable and we can gather the result
+         if (infoOnUserTicket != null) {
+         
+            ticketAvaliable = true;
+            TicketNumberMsg.setText("Info about " + TheUser + "'s ticket " + ticketNumber);
+            AirportStartMsg.setText ("The start airport is " + infoOnUserTicket[2]);
+            DestinationStartMsg.setText( "The destination airport is " + infoOnUserTicket[3]);
+            FinalTicketPrice.setText( "The price of this ticket without tax was: $" + infoOnUserTicket[7]);
+            
+            
+            
+            // We know this ticket exists so lets check for the next one
+            // We already have info on this ticket so lets incriment to a new ticket that may or may not exist
+            ticketNumber++;
+            
+            infoOnNextUserTicket = TicketInformationScanner.ReturnInfoForTicket(ticketNumber, TheUser);
+            
+            // We know there is a next ticket so update that there is a next ticket
+            if (infoOnNextUserTicket != null) {
+               nextTicketAvaliable = true;
+            
+            }
+            
+            
+            
+         }
+            
+      }
+      
+            
+            
+      catch (FileNotFoundException f) {
+         System.out.println("An error occured while trying to read the tickets database");
+      }
+            
+            
+         // If the info on our next ticket is not null then a valid ticket was found so this ticket is avaliable
+         
+            
+      
+
+
+         if (nextTicketAvaliable == false) {
          
             // Make the View New Ticket button invisible because it can't do anything else
             ViewNextTicket.setBounds(5000, 750, 340, 60);
+            
             noNextTicketMsg.setText("**No more tickets in your name could be found**"); 
          
          }
          
-         else {
-         
-         //INSERT CODE FOR GATHERING INFO ON THE NEXT TICKET NUMBER
-         }
       
       }
    }

@@ -467,10 +467,12 @@ public ScheduleAFlightInterface(String userName) {
          
       // We want to make things simple so we will just send the entire date, instead of the pieces, to the finalize ticket interface   
       String completeUserFlightDate = (monthOfUserFlight + "/" + dayOfUserFlight + "/" + yearOfUserFlight);
-
+   
       FinalizeTicketInterface frame6;
+      
+      // The true at the end means that this instance represents a new ticket. Meaning there will now be an option to create the ticket
       frame6 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
-                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice,completeUserFlightDate);
+                     UsersMultipleFlightChoice,originalTicketPrice,currentTicketPrice,UsersFlightTimeChoice,completeUserFlightDate,true);
       
       }
    }

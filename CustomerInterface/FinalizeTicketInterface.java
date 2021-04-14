@@ -30,13 +30,16 @@ public class FinalizeTicketInterface extends JFrame{
    private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice, completeUserFlightDate; 
    
    private double originalticketPrice, finalticketPrice;
+   
+   // This boolean will denote whether or not this ticket already exists
+   private boolean isNewTicket;
  
    // These represent our hidden text boxes that the user will have to fill in to continue
    // we need a lot of inputs for every entry field on the Schedule a flight interface as well as the customers name and the final cost
    // of the customers flight(s)
    public FinalizeTicketInterface(String TheUserIn,String usersStartAirportIn, String usersDestinationAirportIn,String UsersSeatChoiceIn, 
                      String UsersMultipleFlightChoiceIn, int originalticketPriceIn, int finalticketPriceIn,String UsersFlightTimeChoiceIn,
-                     String completeUserFlightDateIn) {
+                     String completeUserFlightDateIn, boolean isNewTicketIn) {
      
      // Lets initialize all of our input values               
       TheUser = TheUserIn;
@@ -48,7 +51,7 @@ public class FinalizeTicketInterface extends JFrame{
       finalticketPrice = finalticketPriceIn;
       UsersFlightTimeChoice = UsersFlightTimeChoiceIn;
       completeUserFlightDate = completeUserFlightDateIn;                    
-                     
+      isNewTicket = isNewTicketIn;               
       createView();
       
       setTitle(TheUser + "'s ticket");
@@ -226,8 +229,12 @@ public class FinalizeTicketInterface extends JFrame{
            totalAmuontUserOwesMsg.setBounds(2, 590, 600, 50);
 
 
-
+            // We want to hide this button if this ticket already exists
+           if (isNewTicket == true) {
+           
            submit.setBounds(175, 640, 200, 30);
+           
+           }
            ticketConfirmedMsg.setBounds(2,680,1000,50);
       
       
