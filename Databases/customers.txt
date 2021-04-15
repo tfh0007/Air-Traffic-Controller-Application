@@ -94,3 +94,7 @@ ItIsRightHere@right.domain
 aTestUser
 test
 thisIsATest@msn.com
+
+feetMan
+feet
+iAmFeet@hotmail.com
