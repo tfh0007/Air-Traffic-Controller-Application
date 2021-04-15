@@ -35,11 +35,11 @@ Image img = Toolkit.getDefaultToolkit().getImage("../Graphics/DataBackground.jpg
    private JLabel AboutYourTickets, UserHasNoTicketsMsg, UserHasNoTicketsMsg2, TicketNumberMsg, AirportStartMsg, DestinationStartMsg, TravelDate,
                   FinalTicketPrice, noNextTicketMsg;
    
-   private String[] infoOnUserTicket = {null,null,null,null,null,null,null,null,null};
+   private String[] infoOnUserTicket = {null,null,null,null,null,null,null,null,null,null,null};
    
    // This has to be declared outside of the try block
    // We also need to make the size otherwise we will run into errors when the try block that gathers the values fails to find a match
-   private String[] infoOnNextUserTicket = {null,null,null,null,null,null,null,null,null};
+   private String[] infoOnNextUserTicket = {null,null,null,null,null,null,null,null,null,null,null};
 
    
    // This will signify what number ticket we are currently at
@@ -350,15 +350,19 @@ createView(userName);
       double originalticketPrice = Double.parseDouble(infoOnUserTicket[6]);
       double finalticketPrice = Double.parseDouble(infoOnUserTicket[7]);
       
+      
       String UsersFlightTimeChoice = infoOnUserTicket[8];
-      String completeUserFlightDate = infoOnUserTicket[9];      
+      String completeUserFlightDate = infoOnUserTicket[9];
+      String UsersFlightTimeChoice2 = infoOnUserTicket[10];
+      String completeUserFlightDate2 = infoOnUserTicket[11];
 // All we need to do is call the FinalizeTicketInterface with the information we gathered about our ticket
             FinalizeTicketInterface frame7;
             
             // Since we have double values that need to be integers we will have to cast the doubles into integers
             // The false at the end means this ticket should not be creatable since it already exists
             frame7 = new FinalizeTicketInterface(TheUser,usersStartAirport,usersDestinationAirport,UsersSeatChoice, 
-                     UsersMultipleFlightChoice,(int)originalticketPrice,(int)finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate, false);
+                     UsersMultipleFlightChoice,(int)originalticketPrice,(int)finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate,
+                     UsersFlightTimeChoice2, completeUserFlightDate2, false);
                      
           }
       

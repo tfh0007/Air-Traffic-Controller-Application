@@ -24,10 +24,11 @@ public class FinalizeTicketInterface extends JFrame{
    private JButton submit, createNewUser;
    
    private JLabel TicketInfoOnUser, startAirportMsg, startAirportNameMsg, startAirportcode, startAirportLocation, destinationAirportNameMsg, destinationAirportcode, 
-                  destinationAirportLocation, userSeatChoiceMsg, UserRoundorSingletripMsg, ticketTypeMsg, flightTimeMsg, dividerMsg, paymentInfoMsg, InitialflightPriceMsg,
+                  destinationAirportLocation, userSeatChoiceMsg, UserRoundorSingletripMsg, ticketTypeMsg, flightTimeMsg, flightTimeMsg2, dividerMsg, paymentInfoMsg, InitialflightPriceMsg,
                   flightDistancePremiumMsg,SeatChoicePremiumMsg,multiWayFlightPremiumMsg,divider2Msg,finalPriceWithoutTaxMsg,taxAmountMsg,totalAmuontUserOwesMsg,ticketConfirmedMsg;
    
-   private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice, completeUserFlightDate; 
+   private String TheUser, usersStartAirport, usersDestinationAirport, UsersSeatChoice, UsersMultipleFlightChoice, UsersFlightTimeChoice, completeUserFlightDate,
+            UsersFlightTimeChoice2,completeUserFlightDate2; 
    
    private double originalticketPrice, finalticketPrice;
    
@@ -39,7 +40,7 @@ public class FinalizeTicketInterface extends JFrame{
    // of the customers flight(s)
    public FinalizeTicketInterface(String TheUserIn,String usersStartAirportIn, String usersDestinationAirportIn,String UsersSeatChoiceIn, 
                      String UsersMultipleFlightChoiceIn, int originalticketPriceIn, int finalticketPriceIn,String UsersFlightTimeChoiceIn,
-                     String completeUserFlightDateIn, boolean isNewTicketIn) {
+                     String completeUserFlightDateIn, String UsersFlightTimeChoice2In, String completeUserFlightDate2In, boolean isNewTicketIn) {
      
      // Lets initialize all of our input values               
       TheUser = TheUserIn;
@@ -50,7 +51,11 @@ public class FinalizeTicketInterface extends JFrame{
       originalticketPrice = originalticketPriceIn;
       finalticketPrice = finalticketPriceIn;
       UsersFlightTimeChoice = UsersFlightTimeChoiceIn;
-      completeUserFlightDate = completeUserFlightDateIn;                    
+      completeUserFlightDate = completeUserFlightDateIn;
+      UsersFlightTimeChoice2 = UsersFlightTimeChoice2In;
+      completeUserFlightDate2 = completeUserFlightDate2In;
+      
+                          
       isNewTicket = isNewTicketIn;               
       createView();
       
@@ -58,7 +63,7 @@ public class FinalizeTicketInterface extends JFrame{
       //Make window exit application on close
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       //set display frame size (x-axis, y-axis)
-      setSize(570, 710);
+      setSize(570, 720);
       //Center the frame to middle of screen
       setLocationRelativeTo(null);
       //Disable resize
@@ -107,7 +112,20 @@ public class FinalizeTicketInterface extends JFrame{
       flightTimeMsg = new JLabel("Your flight is scheduled for: "  + completeUserFlightDate + " at " + UsersFlightTimeChoice);
       flightTimeMsg.setFont(new Font("Arial", Font.PLAIN, 12));
       
+      flightTimeMsg2 = new JLabel();
+      flightTimeMsg2.setFont(new Font("Arial", Font.PLAIN, 12));
       
+      
+      if (UsersMultipleFlightChoice.equals("Round trip ticket")) {
+      
+         flightTimeMsg2.setText("Your return flight is scheduled for: "  + completeUserFlightDate2 + " at " + UsersFlightTimeChoice2);
+      
+      }
+      else {
+      
+         flightTimeMsg2.setText("No return flight time exists");
+         
+      }
       
       dividerMsg = new JLabel("__________________________________________________");
       dividerMsg.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -211,31 +229,32 @@ public class FinalizeTicketInterface extends JFrame{
                userSeatChoiceMsg.setBounds(2, 250, 600, 50);
                    ticketTypeMsg.setBounds(2, 280, 600, 50);
                    flightTimeMsg.setBounds(2, 310, 600, 50);
+                   flightTimeMsg2.setBounds(2, 340, 600, 50);
                    
-                      dividerMsg.setBounds(2, 340, 600, 50);
+                      dividerMsg.setBounds(2, 350, 600, 50);
                    
-                   paymentInfoMsg.setBounds(2, 360, 600, 50);
-            InitialflightPriceMsg.setBounds(2, 390, 600, 50);
-         flightDistancePremiumMsg.setBounds(2, 420, 600, 50);
-             SeatChoicePremiumMsg.setBounds(2, 450, 600, 50);
-         multiWayFlightPremiumMsg.setBounds(2, 480, 600, 50);
-                      divider2Msg.setBounds(2, 510, 600, 50);
+                   paymentInfoMsg.setBounds(2, 370, 600, 50);
+            InitialflightPriceMsg.setBounds(2, 400, 600, 50);
+         flightDistancePremiumMsg.setBounds(2, 430, 600, 50);
+             SeatChoicePremiumMsg.setBounds(2, 460, 600, 50);
+         multiWayFlightPremiumMsg.setBounds(2, 490, 600, 50);
+                      divider2Msg.setBounds(2, 520, 600, 50);
                       
                       
-          finalPriceWithoutTaxMsg.setBounds(2, 530, 600, 50);
-                     taxAmountMsg.setBounds(2, 560, 600, 50);
+          finalPriceWithoutTaxMsg.setBounds(2, 540, 600, 50);
+                     taxAmountMsg.setBounds(2, 570, 600, 50);
                      
            // This message should have emphasis so it will be bigger and farther away from other messages                  
-           totalAmuontUserOwesMsg.setBounds(2, 590, 600, 50);
+           totalAmuontUserOwesMsg.setBounds(2, 600, 600, 50);
 
 
             // We want to hide this button if this ticket already exists
            if (isNewTicket == true) {
            
-           submit.setBounds(175, 640, 200, 30);
+           submit.setBounds(175, 650, 200, 30);
            
            }
-           ticketConfirmedMsg.setBounds(2,680,1000,50);
+           ticketConfirmedMsg.setBounds(2,690,1000,50);
       
       
       
@@ -253,6 +272,7 @@ public class FinalizeTicketInterface extends JFrame{
       panel.add(userSeatChoiceMsg);
       panel.add(ticketTypeMsg);
       panel.add(flightTimeMsg);
+      panel.add(flightTimeMsg2);
       
       panel.add(dividerMsg);
       
@@ -295,11 +315,19 @@ public class FinalizeTicketInterface extends JFrame{
       // This will let us know if a ticket was properly added or not
       boolean isTicketAdded = false;
       
+      // When we have a one way ticket the date and time for the second flight is not applicable to add to the database
+      if (UsersMultipleFlightChoice.equals("One way ticket")) {
+         UsersFlightTimeChoice2 = ("N/A");
+         completeUserFlightDate2 = ("N/A");
+      
+      }
+      
       
       try {
          isTicketAdded = TicketInformationScanner.addNewTicket(TheUser,usersStartAirport,usersDestinationAirport,
                                           UsersSeatChoice,UsersMultipleFlightChoice,originalticketPrice,
-                                          finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate);
+                                          finalticketPrice,UsersFlightTimeChoice,completeUserFlightDate, 
+                                          UsersFlightTimeChoice2, completeUserFlightDate2);
          
          // Inform the user that the ticket was added to the database when it is                                
          if (isTicketAdded = true) {

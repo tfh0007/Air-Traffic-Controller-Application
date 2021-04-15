@@ -564,7 +564,7 @@ return result;
          else if (now.isAfter(inputDate) || now.isEqual(inputDate)) {
          
             // The  user date is not a valid entry so inform the user
-            label.setText("**Your date has to be in the future**");
+            label.setText("**Your ticket has to be in the future**");
             System.out.println("DEBUG: Uh oh: Your flight has to be in the future");
             return false;
          }
@@ -573,7 +573,7 @@ return result;
         catch (DateTimeParseException f) {
         
             // The  user date is not a valid entry so inform the user
-            label.setText("**Your date is not a valid date**");
+            label.setText("**Your start date is not a valid date**");
             System.out.println("DEBUG: Date format of inputDate was illegal");
             return false;
    
@@ -583,5 +583,62 @@ return result;
      return false;
   
       }
+      
+      // This function will test an inputted date with another inputted date
+// If The inputed date is illegally formatted such as when year is impossible, day is impossible, month is impossible, etc
+// then false will be returned
+// False will also be returned if the second date is not after the first date
+  public static boolean compareOriginalWithNewUserDate(JLabel label, String month1,String day1,String year1, String month2, String day2, String year2) {    
+   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-YYYY");  
+   LocalDate firstDate;
+   LocalDate secondDate;
+   
+   // We need to compare two diffrent dates (The first date with the second date
+   
+      String UserDate1 = year1 + "-" + month1 + "-" + day1;
+      String UserDate2 = year2 + "-" + month2 + "-" + day2;
+      
+      // Reset the error message back to nothing since we do not know if the date is valid or not yet
+      label.setText("                                                   ");
+   
+  
+      try {
+   
+         firstDate = LocalDate.parse(UserDate1);
+         secondDate = LocalDate.parse(UserDate2);
+   
+   
+         if (firstDate.isBefore(secondDate)) {
+         
+         // This is the case we want/need
+            // Since the date is formated correctly get rid of any erro message
+            label.setText("                                                                  ");
+            System.out.println("DEBUG: Date of user's first selected date: " + dtf.format(firstDate) + " is before the user's second selected date: " + dtf.format(secondDate));
+            return true;
+
+         }
+         else if (firstDate.isAfter(secondDate) || firstDate.isEqual(secondDate)) {
+         
+            // The  user date is not a valid entry so inform the user
+            label.setText("**Return date has to be later than original date**");
+            System.out.println("DEBUG: Uh oh: Your return has to be in the future of the original date");
+            return false;
+         }
+       }
+  
+        catch (DateTimeParseException f) {
+        
+            // The  user date is not a valid entry so inform the user
+            label.setText("**Your return date is not valid **");
+            System.out.println("DEBUG: Date format of inputDate was illegal");
+            return false;
+   
+        }
+     // we should never get here but in case we do something wrong happened 
+            System.out.println("WARNING: There was an issue that occured while trying to compare Today's and the user's date");
+     return false;
+  
+      }
+
 
 }

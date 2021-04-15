@@ -35,7 +35,7 @@ public class TicketInformationScanner {
       String currentEmail = "";
       
       // an array containing all of the ticket information
-      String[] aboutTicketArray = {"","","","","","","","","",""};
+      String[] aboutTicketArray = {"","","","","","","","","","","",""};
       
       Scanner scanFile = new Scanner(new File(fileName));
       
@@ -52,6 +52,8 @@ public class TicketInformationScanner {
    // Line 7: is finalticketPrice
    // Line 8: is UsersFlightTimeChoice
    // Line 9: is completeUserFlightDate
+   // Line 10: is UsersFlightTimeChoice2
+   // Line 11: is completeUserFlightDate2
    
    // Every ticket will occur in incriments of 10. The file starts at line 0
     
@@ -89,6 +91,12 @@ public class TicketInformationScanner {
    // We are at completeUserFlightDate
    aboutTicketArray[9] = scanFile.nextLine();
    
+   // We are at UsersFlightTimeChoice2
+   aboutTicketArray[10] = scanFile.nextLine();
+   
+   // We are at completeUserFlightDate2
+   aboutTicketArray[11] = scanFile.nextLine();
+   
    // compare our CurrentName with the inputed customerUserName 
   if (customerUserName.equals(aboutTicketArray[1])) {
   
@@ -122,7 +130,7 @@ public class TicketInformationScanner {
   // Returns: True if a new ticket was created and added to the ../Databases/tickets.txt file and false if no ticket was created 
   static boolean addNewTicket(String customerUserName,String usersStartAirport, String usersDestinationAirport,String UsersSeatChoice, 
                      String UsersMultipleFlightChoice, double originalticketPrice, double finalticketPrice,String UsersFlightTimeChoice,
-                     String completeUserFlightDate) throws FileNotFoundException {     
+                     String completeUserFlightDate, String UsersFlightTimeChoice2, String completeUserFlightDate2) throws FileNotFoundException {     
      
       String fileName = "../Databases/tickets.txt";   
       
@@ -179,6 +187,15 @@ public class TicketInformationScanner {
   // Add the completeUserFlightDate to the bottom
   Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
   Files.write(Paths.get(fileName),completeUserFlightDate.getBytes(),StandardOpenOption.APPEND);
+  
+  
+  // Add the UsersFlightTimeChoice2 to the bottom
+  Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
+  Files.write(Paths.get(fileName),UsersFlightTimeChoice2.getBytes(),StandardOpenOption.APPEND);
+
+  // Add the completeUserFlightDate2 to the bottom
+  Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
+  Files.write(Paths.get(fileName),completeUserFlightDate2.getBytes(),StandardOpenOption.APPEND);
   
   // Create a blank line to distinguish from the next ticket
   Files.write(Paths.get(fileName),"\n".getBytes(),StandardOpenOption.APPEND);
