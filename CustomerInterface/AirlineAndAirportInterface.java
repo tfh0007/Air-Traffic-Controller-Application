@@ -268,6 +268,9 @@ createView(userName);
       public void actionPerformed(ActionEvent e) {
       
       
+      
+      System.out.println("DEBUG:  Review User Info button was pressed");
+      
       // Hide the create new user interface window
       setVisible(false);
       
@@ -277,7 +280,6 @@ createView(userName);
       frame4 = new ShowUserInfoInterface(TheUser);
 
       
-      System.out.println("DEBUG:  Review User Info button was pressed");
 
 
       }
@@ -290,7 +292,14 @@ createView(userName);
       
       System.out.println("DEBUG:   Check Status Of Existing Flight button was pressed");
 
-
+      // Hide the create new user interface window
+      setVisible(false);
+      
+      // Destroy the AirlineAndAirport dashboard interface window. We can create a new one if needed later
+      dispose();
+      ShowUserTicketInfoInterface frame6;
+      frame6 = new ShowUserTicketInfoInterface(TheUser);
+      
       }
   }
 

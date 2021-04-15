@@ -44,7 +44,7 @@ public class AirportInformationScanner {
 
    // We are at airport name
    currentName = scanFile.nextLine();
-   //System.out.println("DEBUG:" + currentName + " is the name of the user being read");
+   System.out.println("DEBUG:" + currentName + " is the name of the airport being read");
 
 
    // We are at airport code now
@@ -285,4 +285,4 @@ static String[] ReturnInfoOnAirport(String airportName)
    }
 
 
-}
+

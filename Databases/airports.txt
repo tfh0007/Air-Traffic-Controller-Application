@@ -1,3 +1,4 @@
+
 Birmingham-Shuttlesworth International Airport
 BHM
 Birimingham, AL
@@ -8,7 +9,6 @@ Hartsfield-Jackson Atlanta International Airport
 ATL
 Atlanta, GA
 33.6407 N
-84.4277 w
 
 Ronald Reagan Washington National Airport
 DCA
