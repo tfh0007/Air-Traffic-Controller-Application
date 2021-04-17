@@ -14,4 +14,4 @@ d. Note: Evaluation does not include checking for robustness of your code. Compl
 Correctness will suffice.
 
 # Demonstration of the Project
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=WH5MuTjPKhk)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/WH5MuTjPKhk/0.jpg)](https://www.youtube.com/watch?v=WH5MuTjPKhk)
