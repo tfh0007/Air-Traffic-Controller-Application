@@ -1,6 +1,22 @@
-# This implemetation is based on the following project description
+# About the Project
+- A fully interactive application that allows users to create and view their tickets
+- The application stores and retrieves customers, tickets, and airports from different databases
+- The databases were made simple and used consistent formatting
+- Part of a Software Modeling and Design Project
+- Created as a shared GitHub Project
+- Designed based on UML diagrams and GRASP Design patterns created by a team
 
-Air Traffic Control System / Flight Management System: Create an air traffic control system which manages assignment of planes to flights based on occupancy. Passengers with confirmed tickets are assigned seats prior to flight. Flights can be scheduled to depart and arrive at specific airports. A given city may have zero or more airports. Flights belong to a specific airline. Pilots are hired by airlines, along with other staff. Flights can be scheduled based on availability of pilots and departing gates in airport. Upon arrival, flights need to be serviced (clean, refuel, repair, de-ice, restock, etc.). Upon arrival at destination airport, flights can land only upon availability of free gate. Pilot can fly a maximum of only 2 flights or 8 hours per day. Pilots and staff receive feedback from passengers after each flight based on their service satisfaction. Ratings range from 1 to 5. Any pilot / staff member with two consecutive ratings of less than 2 will be fired. If insufficient staff available, airline hires, as per requirement. Flights may be delayed in journey or cancelled prior to departure based on various reasons such as inclement weather, unavailability of pilots, gates, staff, security incidents, etc. System should be highly available and should run for a long time.
+## What was Learned
+- Learned about creating menu objects and allowing interaction through them
+- Used custom Scanner classes to manage the transfer of data betwen the program and the databases
+- Created multiple threads to allow for asyncronous operations as well as unique visuals
+- Managed the development process and intructed team members on solutions
+- Handled and resolved merge conflicts between various git branches that were created
+- Used extensive debugging and error checking to find issues with the logic
+- Used Exception handeling to prevent user invalid entries from corrupting the program
+- Implemented action listeners so the user could interact with objects
+- Made the experience unique to every user by gathering data on every customer
 
-# Demonstration of the Project
+
+## Visual Demonstration of the Project
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/WH5MuTjPKhk/0.jpg)](https://www.youtube.com/watch?v=WH5MuTjPKhk)
