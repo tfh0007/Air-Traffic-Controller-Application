@@ -1,4 +1,4 @@
-# About the Project
+# About this Project
 - A fully interactive application that allows users to create and view their tickets
 - The application stores and retrieves customers, tickets, and airports from different databases
 - The databases were made simple and used consistent formatting
