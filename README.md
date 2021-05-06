@@ -7,7 +7,7 @@
 - Designed based on UML diagrams and GRASP Design patterns created by a team
 
 ## What was Learned
-- Learned about creating menu objects and allowing interaction through them
+- Learned about creating menu objects and allowing interaction with them
 - Used custom Scanner classes to manage the transfer of data betwen the program and the databases
 - Created multiple threads to allow for asyncronous operations as well as unique visuals
 - Managed the development process and intructed team members on solutions
