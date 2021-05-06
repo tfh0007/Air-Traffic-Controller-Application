@@ -16,6 +16,7 @@
 - Used Exception handeling to prevent user invalid entries from corrupting the program
 - Implemented action listeners so the user could interact with objects
 - Made the experience unique to every user by gathering data on every customer
+- Used parsers for assigning format to date objects
 
 
 ## Visual Demonstration of the Product
