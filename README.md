@@ -10,9 +10,9 @@
 - Learned about creating menu objects and allowing interaction with them
 - Used custom Scanner classes to manage the transfer of data betwen the program and the databases
 - Created multiple threads to allow for asyncronous operations as well as unique visuals
-- Managed the development process and intructed team members on solutions
+- Managed the development process and instructed team members on solutions
 - Handled and resolved merge conflicts between various git branches that were created
-- Used extensive debugging and error checking to find issues with the logic
+- Used extensive debugging and error checking to find and test for issues with the logic
 - Used Exception handeling to prevent user invalid entries from corrupting the program
 - Implemented action listeners so the user could interact with objects
 - Made the experience unique to every user by gathering data on every customer
