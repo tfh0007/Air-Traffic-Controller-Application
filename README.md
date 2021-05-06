@@ -18,5 +18,5 @@
 - Made the experience unique to every user by gathering data on every customer
 
 
-## Visual Demonstration of the Project
+## Visual Demonstration of the Product
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/WH5MuTjPKhk/0.jpg)](https://www.youtube.com/watch?v=WH5MuTjPKhk)
