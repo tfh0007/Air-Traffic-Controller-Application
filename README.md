@@ -14,7 +14,7 @@
 - Handled and resolved merge conflicts between various git branches that were created
 - Used extensive debugging and error checking to find and test for issues with the logic
 - Used Exception handeling to prevent a user's invalid entries from corrupting the program
-- Implemented action listeners so the user could interact with objects
+- Implemented action listeners so the user can interact with objects
 - Made the experience unique to every user by gathering data on every customer
 - Used parsers for assigning format to date objects
 
