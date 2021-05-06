@@ -4,7 +4,8 @@
 - The databases were made simple and used consistent formatting
 - Part of a Software Modeling and Design Semester Long Project
 - Created as a shared GitHub Project
-- Designed based on UML diagrams and GRASP Design patterns created by a team
+- Designed based on UML diagrams and GRASP Design patterns
+- Created with a team
 
 ## What was Learned
 - Learned about creating menu objects and allowing interaction through them
