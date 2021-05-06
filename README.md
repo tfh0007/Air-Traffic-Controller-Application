@@ -2,7 +2,7 @@
 - A fully interactive application that allows users to create and view their tickets
 - The application stores and retrieves customers, tickets, and airports from different databases
 - The databases were made simple and used consistent formatting
-- Part of a Software Modeling and Design Project
+- Part of a Software Modeling and Design Semester Long Project
 - Created as a shared GitHub Project
 - Designed based on UML diagrams and GRASP Design patterns created by a team
 
