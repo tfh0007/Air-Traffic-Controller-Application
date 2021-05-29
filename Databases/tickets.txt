@@ -178,3 +178,15 @@ One way ticket
 09/14/2021
 N/A
 N/A
+
+admin
+Birmingham-Shuttlesworth International Airport
+Adelaide Airport
+Business Class
+Round trip ticket
+223.0
+4014.0
+4:00 p.m
+05/22/2021
+6:00 p.m
+08/21/2021
